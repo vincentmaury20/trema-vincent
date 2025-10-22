@@ -35,6 +35,8 @@ Faire valider par l’équipe avant de développer.
 
 5. Mise en place de la vue contact avec création d’un formulaire fonctionnel
 
+# Lundi 20/10
+
 ## Entités du projet Tréma
 
 ### User
@@ -269,3 +271,43 @@ ADD FOREIGN KEY (testimony_id) REFERENCES testimony(id);
 
 <!-- Je ne savais pas que MOCODO pouvait également fournir Les Tables, les chemins relationnels etc...(tout de même à revoir et faire valider par Lauréanne ou/et Pauline)
 à revoir également les VARCHAR 42 c'est surement limite... -->
+
+# Mardi 21/10
+
+Revue de l'établissement des tables et retrait de celles qui n'auvaient pas leur place
+
+Réédition du MDC (le lien est mis à jour)
+
+aujourd'hui très frustrant d'avoir perdu du temps pour rien, littéralement car la création de la database ne se faisait pas et ne pouvait pas se faire car tout simplement je n'avais pas installer ce fichu postgresql... le problème était entre la chaisse et l'ordinateur apparemment
+
+je rencontre d'ailleurs toujours des soucis avec cette tâche
+
+J'ai pourtant suivi la doc synfony mais je n'arrive pas à la créer
+
+Désinstaller puis réinstaller le postgresql entièrement avec une subtilité puisque j'installe page4admin
+
+mon but serait d'enfin avoir la bdd de créée ensuite je passerai enfin aux migrations
+
+bon c'est toujours un echec je ne comprends pas...
+une journée dessus et je ne sais pas ce qu'il se passe
+à voir peut-être avec les filles du coup... je pensais pouvoir y arriver
+peut-être un autre SGBD
+
+j'ai réinstallé encore une fois on va bien voir
+
+# Mercredi 22/10
+
+J'ai enfin pu créer ma BDD.... je l'ai faite à la main et ça s'est bien passé au niveau des migrations
+
+trema=> \dt
+Liste des tables
+SchÚma | Nom | Type | PropriÚtaire
+--------+-----------------------------+-------+--------------
+public | doctrine_migration_versions | table | trema
+public | formation | table | trema
+public | messenger_messages | table | trema
+public | page | table | trema
+public | testimony | table | trema
+public | toto | table | trema
+public | user | table | trema
+(7 lignes)
