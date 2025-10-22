@@ -311,3 +311,10 @@ public | testimony | table | trema
 public | toto | table | trema
 public | user | table | trema
 (7 lignes)
+
+## Je vais m'attaquer à la prochaine étape : l'authentification
+
+Après avoir mis en place tous les controllers, EN SUIVANT LA DOC.... (Je mets ça comme ça car à ce moment là je ne l'ai pas vraiment suivie `composer require symfony/security-bundle` à fait avant de parler de sécurité)
+Il faut résoudre le souci avec les méthodes de User car lors de la commande `php bin/console make:security:form-login`, mais ça ne devrait pas prendre longtemps vu que Lauréanne m'a expliqué quil manquait des fonctions à rajouter au niveau du User.
+Je vais esssayer de préparer le reste du projet correctement et essayer de bien avancer car là ça commence à être un peu long...
+Bien regarder la doc et impératif, et regarder d'autres projets qui se sont faits avec ce même langage... je devrais pouvoir trouver ça pour avoir une aide ...
