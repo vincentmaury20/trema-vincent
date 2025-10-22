@@ -41,3 +41,7 @@ class FormationRepository extends ServiceEntityRepository
     //        ;
     //    }
 }
+
+// Repository chargé des opérations de lecture/écriture pour l'entité "Formation".
+// Il fournit un point central pour construire des requêtes personnalisées et
+// récupérer des objets Formation depuis la base de données via Doctrine.

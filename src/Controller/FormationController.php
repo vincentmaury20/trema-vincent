@@ -16,3 +16,7 @@ final class FormationController extends AbstractController
         ]);
     }
 }
+
+// Contrôleur responsable des pages liées aux "formations".
+// Il reçoit les requêtes HTTP associées aux formations et retourne
+// les réponses appropriées (par ex. rendu du template 'formation/index').

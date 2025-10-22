@@ -49,3 +49,8 @@ class Formation
         return $this;
     }
 }
+
+// Cette classe représente l'entité "Formation" utilisée par Doctrine.
+// Elle définit les propriétés persistées (id, title, content) et
+// fournit les accesseurs/modificateurs (getters/setters) nécessaires
+// pour manipuler les données d'une formation dans l'application.

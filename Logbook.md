@@ -295,6 +295,8 @@ peut-être un autre SGBD
 
 j'ai réinstallé encore une fois on va bien voir
 
+1 journée complète de perdue 😓😓😓
+
 # Mercredi 22/10
 
 J'ai enfin pu créer ma BDD.... je l'ai faite à la main et ça s'est bien passé au niveau des migrations
@@ -318,3 +320,38 @@ Après avoir mis en place tous les controllers, EN SUIVANT LA DOC.... (Je mets �
 Il faut résoudre le souci avec les méthodes de User car lors de la commande `php bin/console make:security:form-login`, mais ça ne devrait pas prendre longtemps vu que Lauréanne m'a expliqué quil manquait des fonctions à rajouter au niveau du User.
 Je vais esssayer de préparer le reste du projet correctement et essayer de bien avancer car là ça commence à être un peu long...
 Bien regarder la doc et impératif, et regarder d'autres projets qui se sont faits avec ce même langage... je devrais pouvoir trouver ça pour avoir une aide ...
+
+#### Petit résumé des choses à faire selon l'avancé du projet actuel :
+
+-   Finaliser les entités manquantes :
+
+    1. SocialLink
+    2. CMS ?
+
+-   Créer les FormTypes
+
+    1. TestimonyType.php
+    2. FormationType.php
+    3. SocialLinkType.php
+    4. ...
+
+-   Ajouter des validations dans les entités
+    1.  Contraintes symfony (NotBlank, Length ....)
+    2.  Messages d'erreurs
+-   Compléter les controllers
+
+    1. Actions new, edit, delete, index pour les entités restantes
+    2. Sécurisation avec ROLE_ADMIN
+
+-   Créer les vues Twig, vraiment
+
+    1. Tous les templates
+
+-   Gérer les slugs et URLs dynamiques
+
+    1. Ajout d’un champ slug dans Page, Formation, etc.
+    2. Routing dynamique basé sur le slug
+
+-   Créer la page Contact avec formulaire fonctionnel
+    1. Entité ou simple traitement via ContactController
+    2. Validation + envoi d’email ou stockage
