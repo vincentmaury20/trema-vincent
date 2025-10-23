@@ -175,7 +175,7 @@ CREATE TABLE testimony (
 );
 
 -- Réseaux sociaux (admin gestion des réseaux sociaux )
-CREATE TABLE social_media (
+CREATE TABLE social_link (
   id SERIAL PRIMARY KEY,
   title VARCHAR(100) NOT NULL,
   link VARCHAR(255) NOT NULL
@@ -257,13 +257,13 @@ ADD FOREIGN KEY (testimony_id) REFERENCES testimony(id);
 ```
 
 -   **CATEGORY** (id*title, *#id*title_content*)
--   **CONTACT_MESSAGE** (id_name_email_subject_message_created_at)
+<!-- -   **CONTACT_MESSAGE** (id_name_email_subject_message_created_at) -->
 -   **CREATE_PAGE** (_#id_name_email_password_role_, _#id_title_content_)
 -   **EDIT_FORMATION** (_#id_name_email_password_role_, _#id_title_content_)
 -   **FORMATION** (id_title_content)
 -   **MANAGE_SOCIAL_MEDIA** (_#id_name_email_password_role_, _#id_title_link_)
 -   **PAGE** (id_title_content)
--   **SEND_MESSAGE** (_#id_name_email_password_role_, _#id_name_email_subject_message_created_at_)
+<!-- -   **SEND_MESSAGE** (_#id_name_email_password_role_, _#id_name_email_subject_message_created_at_) -->
 -   **SOCIAL_MEDIA** (id_title_link)
 -   **TESTIMONY** (id_title_content)
 -   **USER** (id_name_email_password_role)
@@ -316,42 +316,53 @@ public | user | table | trema
 
 ## Je vais m'attaquer à la prochaine étape : l'authentification
 
-Après avoir mis en place tous les controllers, EN SUIVANT LA DOC.... (Je mets ça comme ça car à ce moment là je ne l'ai pas vraiment suivie `composer require symfony/security-bundle` à fait avant de parler de sécurité)
+Après avoir mis en place tous les controllers, EN SUIVANT LA DOC.... (Je mets ça comme ça car à ce moment là je ne l'ai pas vraiment suivie `composer require symfony/security-bundle` à faire avant de parler de sécurité)
 Il faut résoudre le souci avec les méthodes de User car lors de la commande `php bin/console make:security:form-login`, mais ça ne devrait pas prendre longtemps vu que Lauréanne m'a expliqué quil manquait des fonctions à rajouter au niveau du User.
 Je vais esssayer de préparer le reste du projet correctement et essayer de bien avancer car là ça commence à être un peu long...
 Bien regarder la doc et impératif, et regarder d'autres projets qui se sont faits avec ce même langage... je devrais pouvoir trouver ça pour avoir une aide ...
+
+```bash
+trema=> SELECT * FROM "user";
+ id | name  |     email      |                           password                           |    role
+----+-------+----------------+--------------------------------------------------------------+------------
+  1 | Admin | admin@site.com | $2y$13$RuKNhxKTjelVxlCDJaer3Oil2VpK.4.CE.YCZn8.BpJFvw7z71X12 | ROLE_ADMIN
+(1 ligne)
+
+```
 
 #### Petit résumé des choses à faire selon l'avancé du projet actuel :
 
 -   Finaliser les entités manquantes :
 
-    1. SocialLink
-    2. CMS ?
+    -   SocialLink☑️
+    -   CMS ?
 
 -   Créer les FormTypes
 
-    1. TestimonyType.php
-    2. FormationType.php
-    3. SocialLinkType.php
-    4. ...
+    -   TestimonyType.php
+    -   FormationType.php☑️
+    -   SocialLinkType.php
+    -   ...
 
 -   Ajouter des validations dans les entités
-    1.  Contraintes symfony (NotBlank, Length ....)
-    2.  Messages d'erreurs
+
+    -   Contraintes symfony (NotBlank, Length ....)
+    -   Messages d'erreurs
+
 -   Compléter les controllers
 
-    1. Actions new, edit, delete, index pour les entités restantes
-    2. Sécurisation avec ROLE_ADMIN
+    -   Actions new, edit, delete, index pour les entités restantes
+    -   Sécurisation avec ROLE_ADMIN
 
 -   Créer les vues Twig, vraiment
 
-    1. Tous les templates
+    -   Tous les templates
 
 -   Gérer les slugs et URLs dynamiques
 
-    1. Ajout d’un champ slug dans Page, Formation, etc.
-    2. Routing dynamique basé sur le slug
+    -   Ajout d’un champ slug dans Page, Formation, etc.
+    -   Routing dynamique basé sur le slug
 
 -   Créer la page Contact avec formulaire fonctionnel
-    1. Entité ou simple traitement via ContactController
-    2. Validation + envoi d’email ou stockage
+    -   Entité ou simple traitement via ContactController
+    -   Validation + envoi d’email ou stockage
