@@ -36,4 +36,9 @@ class CreateAdminUserCommand extends Command
       $output->writeln('Admin créé avec succès !');
       return Command::SUCCESS;
    }
+
+   // Commande console : 'php bin/console app:create-admin'
+   // Ce fichier définit une commande CLI qui crée un utilisateur administrateur
+   // avec un rôle ROLE_ADMIN et un mot de passe par défaut (ici 'admin123').
+   // Utile pour initialiser rapidement un compte admin en environnement de dev.
 }

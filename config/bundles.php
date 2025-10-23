@@ -15,3 +15,8 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
 ];
+
+// Résumé :
+// Ce fichier déclare les bundles Symfony à charger selon l’environnement (dev, test, prod).
+// Il active les composants essentiels du framework, l’ORM Doctrine, le moteur Twig, la sécurité, les logs, et les outils UX.
+// Certains bundles comme Debug, WebProfiler, Maker et Fixtures sont limités aux environnements de développement ou de test pour éviter les surcharges en production.
