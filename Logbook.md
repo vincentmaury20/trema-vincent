@@ -1,5 +1,7 @@
 # Projet de stage Tréma
 
+<!-- Ce fichier est vraiment juste un support personnel, comme un carnet de notes, il est destiné à être supprimé  -->
+
 [Le site en ligne actuellement](https://www.trema-coach.com/)
 
 ## Infos générales
@@ -333,21 +335,27 @@ trema=> SELECT * FROM "user";
 #### Petit résumé des choses à faire selon l'avancé du projet actuel :
 
 -   Finaliser les entités manquantes :
+    <!-- attention les tables de liaisons ne sont pas faites ... -->
 
-    -   SocialLink☑️
-    -   CMS ?
+        -   SocialLink☑️
+        -   CMS ?
+
+    <!-- et les tables de liaisons donc: -->
+
+        - create_page
+        - edit_formation
+
+-   Ajouter des validations dans les entités
+
+    -   Messages d'erreurs
+    -   Contraintes symfony (NotBlank, Length ....)
 
 -   Créer les FormTypes
 
     -   TestimonyType.php
-    -   FormationType.php☑️
+    -   FormationType.php☑️ dans le controller, gérer le fait que ce soit juste l'admin qui puisse le faire
     -   SocialLinkType.php
     -   ...
-
--   Ajouter des validations dans les entités
-
-    -   Contraintes symfony (NotBlank, Length ....)
-    -   Messages d'erreurs
 
 -   Compléter les controllers
 
@@ -371,27 +379,24 @@ trema=> SELECT * FROM "user";
 
 Voici une description en français du rôle des principaux dossiers et fichiers du projet :
 
-- `composer.json` : configuration des dépendances PHP (Composer) et autoload.
-- `compose.yaml` / `compose.override.yaml` : fichiers Docker Compose pour lancer les services (base de données, serveur, etc.).
-- `public/` : racine publique du serveur web (contient `index.php`, assets compilés).
-- `bin/` : scripts exécutables du projet (ex : `console` pour Symfony).
-- `src/` : code source PHP de l'application (contrôleurs, entités, repositories, services, security, commandes).
-  - `src/Controller/` : contrôleurs HTTP (actions qui retournent des Response/Twig/JSON).
-  - `src/Entity/` : entités Doctrine (modèles persistés en base).
-  - `src/Repository/` : classes pour requêtes personnalisées (QueryBuilder/DQL).
-  - `src/Form/` : FormType Symfony (définition des formulaires).
-  - `src/Security/` : authenticators, providers, règles de sécurité.
-  - `src/Command/` : commandes console (Console) pour tâches d'administration.
+-   `composer.json` : configuration des dépendances PHP (Composer) et autoload.
+-   `compose.yaml` / `compose.override.yaml` : fichiers Docker Compose pour lancer les services (base de données, serveur, etc.).
+-   `public/` : racine publique du serveur web (contient `index.php`, assets compilés).
+-   `bin/` : scripts exécutables du projet (ex : `console` pour Symfony).
+-   `src/` : code source PHP de l'application (contrôleurs, entités, repositories, services, security, commandes).
 
-- `templates/` : templates Twig pour le rendu des pages (ex : `formation/`, `user/`, `security/`).
-- `assets/` : sources front-end (JS, CSS), contrôleurs Stimulus, point d'entrée JS.
-- `config/` : configuration Symfony (services, packages, routes).
-- `migrations/` : fichiers de migration Doctrine (versionnement du schéma de la base).
-- `var/` : cache et logs générés à l'exécution.
-- `vendor/` : dépendances installées par Composer.
-- `tests/` : tests PHPUnit.
-- `translations/` : fichiers de traduction pour l'internationalisation.
+    -   `src/Controller/` : contrôleurs HTTP (actions qui retournent des Response/Twig/JSON).
+    -   `src/Entity/` : entités Doctrine (modèles persistés en base).
+    -   `src/Repository/` : classes pour requêtes personnalisées (QueryBuilder/DQL).
+    -   `src/Form/` : FormType Symfony (définition des formulaires).
+    -   `src/Security/` : authenticators, providers, règles de sécurité.
+    -   `src/Command/` : commandes console (Console) pour tâches d'administration.
 
-Conseils :
-- Documenter toute modification structurelle dans ce `Logbook.md` pour faciliter l'onboarding.
-- Ajouter un fichier `DOC-structure.md` si tu veux une version courte à la racine pour les nouveaux devs.
+-   `templates/` : templates Twig pour le rendu des pages (ex : `formation/`, `user/`, `security/`).
+-   `assets/` : sources front-end (JS, CSS), contrôleurs Stimulus, point d'entrée JS.
+-   `config/` : configuration Symfony (services, packages, routes).
+-   `migrations/` : fichiers de migration Doctrine (versionnement du schéma de la base).
+-   `var/` : cache et logs générés à l'exécution.
+-   `vendor/` : dépendances installées par Composer.
+-   `tests/` : tests PHPUnit.
+-   `translations/` : fichiers de traduction pour l'internationalisation.
