@@ -352,9 +352,9 @@ trema=> SELECT * FROM "user";
 
 -   Créer les FormTypes
 
-    -   TestimonyType.php
+    -   TestimonyType.php☑️
     -   FormationType.php☑️ dans le controller, gérer le fait que ce soit juste l'admin qui puisse le faire
-    -   SocialLinkType.php
+    -   SocialLinkType.php☑️
     -   ...
 
 -   Compléter les controllers

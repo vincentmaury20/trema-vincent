@@ -13,10 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class FormationController extends AbstractController
 {
     #[Route('/formation', name: 'app_formation')]
-    public function index(): Response
+    public function index(EntityManagerInterface $em): Response
     {
+        $formations = $em->getRepository(Formation::class)->findAll();
+
         return $this->render('formation/index.html.twig', [
             'controller_name' => 'FormationController',
+            'formations' => $formations,
         ]);
     }
 
@@ -45,7 +48,7 @@ final class FormationController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $formation = new Formation();
-        $form = $this->createForm(FormationType::class, $formation); //regarder au niveau des datas car je passe tout en null
+        $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
