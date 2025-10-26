@@ -305,7 +305,7 @@ J'ai enfin pu créer ma BDD.... je l'ai faite à la main et ça s'est bien pass�
 
 trema=> \dt
 Liste des tables
-SchÚma | Nom | Type | PropriÚtaire
+Schéma | Nom | Type | Propriétaire
 --------+-----------------------------+-------+--------------
 public | doctrine_migration_versions | table | trema
 public | formation | table | trema
@@ -400,3 +400,9 @@ Voici une description en français du rôle des principaux dossiers et fichiers 
 -   `vendor/` : dépendances installées par Composer.
 -   `tests/` : tests PHPUnit.
 -   `translations/` : fichiers de traduction pour l'internationalisation.
+
+Pour l'espérience user il faudrait que je fasse un dashboard qui afficherait des liens vers les pages de création de pages, formations, gestion des social medias etc.
+
+# Dimanche 26/10
+
+Je commence par mettre en place ce dashboard dont Lauréanne m'a parlé,

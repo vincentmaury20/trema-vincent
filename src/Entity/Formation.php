@@ -11,6 +11,7 @@ class Formation
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+
     #[ORM\Column]
     private ?int $id = null;
 
@@ -19,6 +20,13 @@ class Formation
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $isPublished = false;
+
+    #[ORM\Column(type: 'datetime')]
+    private \DateTimeInterface $createdAt;
+
 
     public function getId(): ?int
     {
@@ -47,6 +55,23 @@ class Formation
         $this->content = $content;
 
         return $this;
+    }
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+    public function setIsPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
+        return $this;
+    }
+    public function getCreatedAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
 

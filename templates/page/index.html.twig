@@ -1,7 +1,97 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PageController!{% endblock %}
+{% block title %}Liste des pages{% endblock %}
 
 {% block body %}
-    
+<div class="page-container">
+   {% if page is empty %}
+      <div class="empty-message">
+         Aucune page n'a été créée pour le moment.
+      </div>
+   {% else %}
+      {% for item in page %}
+         <div class="page-item">
+            <h1>{{ item.title|e }}</h1>
+            {% if item.subtitle %}
+               <h2>{{ item.subtitle|e }}</h2>
+            {% endif %}
+            <p>{{ item.content|raw }}</p>
+            {% if item.image %}
+               <img
+                  src="{{ asset('uploads/images/' ~ item.image) }}"
+                  alt="{{ item.title|e }}"
+                  width="200"
+                  height="200"
+               >
+            {% endif %}
+         </div>
+      {% endfor %}
+   {% endif %}
+</div>
 {% endblock %}
+
+{% block stylesheets %}
+   {{ parent() }}
+   <style>
+      body {
+         font-family: "Inter", Arial, sans-serif;
+         background-color: #f8f9fa;
+         color: #333;
+         margin: 0;
+         padding: 0;
+      }
+
+      .page-container {
+         max-width: 800px;
+         margin: 40px auto;
+         background: #fff;
+         border-radius: 12px;
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+         padding: 30px;
+      }
+
+      .page-item {
+         border-bottom: 1px solid #eee;
+         padding-bottom: 30px;
+         margin-bottom: 30px;
+      }
+
+      .page-item:last-child {
+         border-bottom: none;
+         margin-bottom: 0;
+         padding-bottom: 0;
+      }
+
+      h1 {
+         font-size: 1.8rem;
+         color: #222;
+         margin-bottom: 10px;
+      }
+
+      h2 {
+         font-size: 1.2rem;
+         color: #666;
+         margin-bottom: 15px;
+         font-weight: 500;
+      }
+
+      p {
+         line-height: 1.6;
+         margin-bottom: 20px;
+      }
+
+      img {
+         display: block;
+         border-radius: 8px;
+         object-fit: cover;
+         margin-top: 10px;
+      }
+
+      .empty-message {
+         text-align: center;
+         padding: 60px 20px;
+         color: #777;
+         font-size: 1.1rem;
+      }
+   </style>
+{% endblock %} 
