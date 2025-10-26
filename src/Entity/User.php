@@ -77,17 +77,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    //  Méthodes obligatoires ajoutées :
-
     public function getUserIdentifier(): string
     {
-        // méthode comme identifiant principal (ex: email)
         return (string) $this->email;
     }
 
     public function getRoles(): array
     {
-        // par défaut ROLE_USER
         $roles = [$this->role ?: 'ROLE_USER'];
         return array_unique($roles);
     }

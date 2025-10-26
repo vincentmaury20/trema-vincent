@@ -83,3 +83,7 @@
 //         ]);
 //     }
 // }
+
+
+
+// je la garde pour le moment, elle me servira à montrer les pages que le client veut montrer

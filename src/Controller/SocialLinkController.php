@@ -15,4 +15,7 @@
 //             'controller_name' => 'SocialLinkController',
 //         ]);
 //     }
-// }
+
+
+
+// }  Peut-être que cette page sera renommée ou sera un des partials "footer" ou "header"
