@@ -7,9 +7,7 @@
 <div class="formations-wrapper">
     <h1>Liste des formations</h1>
     
-    <div class="actions">
-        <a href="{{ path('app_formation_new') }}" class="btn">Ajouter une formation</a>
-    </div>
+
 
     {% if formations is empty %}
         <div class="empty-message">
@@ -22,9 +20,7 @@
                 <div class="formation-content">
                     {{ formation.content }}
                 </div>
-                <div class="actions">
-                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}" class="btn">Modifier</a>
-                </div>
+
             </article>
         {% endfor %}
     {% endif %}

@@ -10,20 +10,20 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SocialLinkType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('title')
-            ->add('link')
-            ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter',
-            ]);
-    }
+   public function buildForm(FormBuilderInterface $builder, array $options): void
+   {
+      $builder
+         ->add('title')
+         ->add('link')
+         ->add('submit', SubmitType::class, [
+            'label' => 'Ajouter',
+         ]);
+   }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => SocialLink::class,
-        ]);
-    }
+   public function configureOptions(OptionsResolver $resolver): void
+   {
+      $resolver->setDefaults([
+         'data_class' => SocialLink::class,
+      ]);
+   }
 }

@@ -1,37 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des pages{% endblock %}
+{% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
-<div class="page-container">
-   {% if page is empty %}
-      <div class="empty-message">
-         Aucune page n'a été créée pour le moment.
-      </div>
-   {% else %}
-      {% for item in page %}
-         <div class="page-item">
-            <h1>{{ item.title|e }}</h1>
-            {% if item.subtitle %}
-               <h2>{{ item.subtitle|e }}</h2>
-            {% endif %}
-            <p>{{ item.content|raw }}</p>
-            {% if item.image %}
-               <img
-                  src="{{ asset('uploads/images/' ~ item.image) }}"
-                  alt="{{ item.title|e }}"
-                  width="200"
-                  height="200"
-               >
-            {% endif %}
-         </div>
-      {% endfor %}
-   {% endif %}
-</div>
+
+<h2>A propos de Tréma Coaching</h2>
+
+{# ici je vais gérer en section la petite présentation de Tréma  #}
+
 {% endblock %}
 
+
 {% block stylesheets %}
-   {{ parent() }} 
+   {{ parent() }}
    <style>
       body {
          font-family: "Inter", Arial, sans-serif;
