@@ -29,6 +29,9 @@ class TestimonyCrudController extends AbstractCrudController
 
             DateField::new('date')
                 ->setLabel('Date du témoignage'),
+
+            TextField::new('name')
+                ->setLabel('Nom'),
         ];
     }
 }

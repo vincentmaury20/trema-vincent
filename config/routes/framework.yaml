@@ -1,4 +1,8 @@
 when@dev:
     _errors:
-        resource: '@FrameworkBundle/Resources/config/routing/errors.php'
+        resource: "@FrameworkBundle/Resources/config/routing/errors.php"
         prefix: /_error
+# ce bloc sert à :
+# - Afficher des pages d’erreur Symfony détaillées pendant le développement.
+# - Tester les pages d’erreur (404, 500…) sans devoir provoquer une vraie erreur.
+# - Ne pas exposer ces routes en production (sécurité + clarté).

@@ -1,3 +1,4 @@
 _security_logout:
     resource: security.route_loader.logout
     type: service
+# c'est un bloc de config qui sert à déclarer la route de logout (déconnexion), cela crée automatiquement une route "/logout", sans avoir à l'écrire manuellement

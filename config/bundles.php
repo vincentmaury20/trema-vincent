@@ -17,3 +17,9 @@ return [
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
 ];
+
+// dans ce bloc: 
+
+// - Symfony sait quels bundles charger au démarrage.
+// - Il optimise les performances en désactivant certains bundles en production (ex: WebProfiler, MakerBundle).
+// - Il permet une modularité claire entre les environnements (dev, test, prod).

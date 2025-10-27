@@ -3,3 +3,6 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+# - Symfony va automatiquement scanner tous les fichiers du dossier Controller.
+# - Il va générer les routes à partir des attributs #[Route(...)] présents dans tes méthodes.
+# - Tu n’as pas besoin de définir les routes manuellement dans un fichier routes.yaml
