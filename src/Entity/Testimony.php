@@ -23,6 +23,10 @@ class Testimony
     #[ORM\Column(length: 5000)]
     private ?string $content = null;
 
+    #[ORM\Column(length: 5000)]
+    private ?string $name = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Testimony
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }

@@ -5,9 +5,9 @@
 {% block body %}
 
    <section class="home-intro">
-       <img src="./assets/images/coaching.avif" alt="" />
+       <img src="{{ asset('images/coaching.avif') }}" alt="Coaching" />
        <h2>Tréma signe de coaching</h2>
-       <img src="./assets/images/coaching2.avif" alt="" />
+       <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" />
        <!-- il faudra renseigner les textes alternatifs pour les images -->
    </section>
    <section class="about">
@@ -17,7 +17,7 @@
        </h4>
        <div class="about-presentation">
            <img
-               src="photo.avif"
+               src="{{ asset('images/photo.avif') }}"
                alt="photo de la présentation de la cheffe d'entreprise"
            />
            <p>
