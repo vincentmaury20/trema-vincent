@@ -2,24 +2,20 @@
 
 
 {% block body %}
-{%if page is not empty %}
+{%if formation is not empty %}
    <div class="page-container">
-      {% for item in page %}
-         <div class="page-item">
+      {% for item in formation %}
+         <div class="formation-item">
             <h1>{{ item.title }}</h1>
-            <h2>{{ item.subtitle }}</h2>
             <p>{{ item.content }}</p>
-            {% if item.image %}
-               <img src="{{ asset('uploads/images/' ~ item.image) }}" alt="{{ item.title }}" width="600" height="400">
-            {% endif %}
          </div>
       {% endfor %}
    </div>
 {% endif %}
 
-{% if page is empty %}
+{% if formation is empty %}
    <div class="empty-message">
-      <p>Aucune page disponible pour le moment.</p>
+      <p>Aucune formation disponible pour le moment.</p>
    </div>
 {% endif %}
 
