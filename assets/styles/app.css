@@ -1,6 +1,14 @@
 body {
     background-color: rgb(255, 255, 255);
+    font-family: "Montserrat", sans-serif;
 }
 .bi {
     color: rgb(60, 156, 211);
+}
+.col:hover {
+    cursor: pointer;
+}
+.site-header {
+    margin-bottom: 1rem;
+    border-radius: 0 0 1rem 1rem;
 }

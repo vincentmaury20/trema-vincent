@@ -3,86 +3,93 @@
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
+    <section class="home-intro container text-center mb-5">
+      <h2 class="display-5 fw-semibold">Tréma signe de coaching</h2>
+      <div class="row justify-content-center g-3">
+        <div class="col-auto">
+          <img src="{{ asset('images/coaching.avif') }}" alt="Coaching" class="rounded img-fluid shadow-sm" />
+        </div>
+        <div class="col-auto">
+          <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" class="rounded img-fluid shadow-sm" />
+        </div>
+      </div>
+    </section>
 
-<section class="home-intro container text-center">
-    <h2>Tréma signe de coaching</h2>
-    <div class="row justify-content-center">
-      <div class="col-auto">
-        <img src="{{ asset('images/coaching.avif') }}" alt="Coaching" class="rounded img-fluid" />
-      </div>
-      <div class="col-auto">
-        <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" class="rounded img-fluid" />
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col">
-      </div>
-    </div>
-</section>
-   <section class="about container overflow-hidden text-center bg-warning p-2 text-dark bg-opacity-50 p-2 text-white rounded">
-       <h3 class="about-title ">à propos</h3>
-       <h4 class="about-subtitle">
-           coaching professionnel et supervision de coachs
-       </h4>
-       <div class="about-presentation ">
-           <img
-               src="{{ asset('images/photo.avif') }}"
-               alt="photo de la présentation de la cheffe d'entreprise" class = "rounded"
-               width= "255" heigth= "300"
-           />
-           <p>
-               Formée aux études marketing, Catia Tuccinardi Gouyette fait ses
-               premiers pas dans le secteur de l’audiovisuel puis de la grande
-               consommation. Son <strong>besoin de liberté</strong> et
-               <strong>son goût du challenge</strong>
-               challenge l'amènent à découvrir les métiers du secteur de la
-               restauration et lui offrent une belle expérience de dirigeante de
-               TPE pendant 16 ans. Aujourd’hui, son coaching est à la fois
-               <strong>entreprenant et intuitif</strong>. c’est
-               <strong>un espace de liberté</strong>
-               liberté.
-           </p>
-       </div>
-       <div class="links">
-           <ul class="link-list">
-               <li class="link-item">
-                   <h2>mes outils</h2>
-                   <p>clés et grilles de lecture</p>
-               </li>
-               <li class="link-item">
-                   <h2>certifications</h2>
-                   <p>la formation continue au coeur du processus</p>
-               </li>
-               <li class="link-item">
-                   <h2>clients/références</h2>
-                   <p>ils me font confiance, témoignages</p>
-               </li>
-               <li class="link-item">
-                   <h2>me contacter</h2>
-                   <p>coordonnées et prise de rendez-vous</p>
-               </li>
-           </ul>
-       </div>
-       <section class="random-themes">
-           <h3>Quelques thématiques :</h3>
-           <ul>
-               <li>asservité et leadership</li>
-               <li>management et posture coach</li>
-               <li>réflexivité et posture de coach</li>
-               <li>gestion des conflits</li>
-               <li>les transitions professionnelles</li>
-               <li>éthique de la performance</li>
-               <li>changer</li>
-               <li>faire des choix</li>
-               <li>adapter sa communication</li>
-               <li>optimiser ses relations clients</li>
-               <li>et bien d'autres ...</li>
-           </ul>
-           <button type="button" onclick="location.href='/formation'">
-               en savoir plus
-           </button>
-       </section>
-   </section>
+    <section class="about container text-center bg-warning bg-opacity-50 text-dark rounded p-4 mb-5">
+      <h3 id="a-propos" class="about-title display-6 fw-bold mb-3">À propos</h3>
+      <h4 class="about-subtitle h5 mb-4">Coaching professionnel et supervision de coachs</h4>
 
+      <div class="about-presentation row justify-content-center align-items-center mb-4">
+        <div class="col-md-auto">
+          <img
+            src="{{ asset('images/photo.avif') }}"
+            alt="photo de la cheffe d'entreprise"
+            class="rounded shadow-sm"
+            width="255" height="300"
+          />
+        </div>
+        <div class="col-md-6 text-start">
+          <p class="lead">
+            Formée aux études marketing, Catia Tuccinardi Gouyette fait ses premiers pas dans l’audiovisuel puis la grande consommation.
+            Son <strong>besoin de liberté</strong> et <strong>goût du challenge</strong> l'amènent à découvrir les métiers de la restauration
+            et à diriger une TPE pendant 16 ans. Aujourd’hui, son coaching est à la fois <strong>entreprenant et intuitif</strong> :
+            <strong>un véritable espace de liberté</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="links row row-cols-1 row-cols-md-2 g-4 mb-4">
+        {% set items = [
+          {'title': 'Mes outils', 'desc': 'Clés et grilles de lecture'},
+          {'title': 'Certifications', 'desc': 'La formation continue au cœur du processus'},
+          {'title': 'Clients / Références', 'desc': 'Ils me font confiance, témoignages'},
+          {'title': 'Me contacter', 'desc': 'Coordonnées et prise de rendez-vous'}
+        ] %}
+        {% for item in items %}
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p class="card-text">{{ item.desc }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    <section class="random-themes mt-4 bg-white rounded shadow-sm p-4">
+      <h3 class="h5 mb-3">Quelques thématiques :</h3>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item">Assertivité et leadership</li>
+        <li class="list-group-item">Management et posture coach</li>
+        <li class="list-group-item">Réflexivité et posture de coach</li>
+        <li class="list-group-item">Gestion des conflits</li>
+        <li class="list-group-item">Transitions professionnelles</li>
+        <li class="list-group-item">Éthique de la performance</li>
+        <li class="list-group-item">Changer</li>
+        <li class="list-group-item">Faire des choix</li>
+        <li class="list-group-item">Adapter sa communication</li>
+        <li class="list-group-item">Optimiser ses relations clients</li>
+        <li class="list-group-item">Et bien d'autres...</li>
+      </ul>
+      <div class="text-center">
+        <button type="button" class="btn btn-outline-dark" onclick="location.href='{{ path('app_formation') }}'">
+          En savoir plus
+        </button>
+      </div>
+    </section>
+    </section>
+    {% block javascripts %}
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            if (window.location.hash === "#a-propos") {
+              const target = document.getElementById("a-propos");
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth" });
+              }
+            }
+          });
+        </script>
+    {% endblock %}
 
 {% endblock %}

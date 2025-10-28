@@ -8,24 +8,12 @@
          <div class="col text-end">
             <nav class="header-nav">
                <a href="{{ path('app_formation') }}" class="btn btn-primary" >Formations</a> 
-               <a href="{{ path('app_formation') }}" class="btn btn-primary">Contact</a> 
+               <a href="#" class="btn btn-primary">Contact</a> 
                <a href="{{ path('app_testimony') }}" class="btn btn-primary">Témoignages</a>
+               <a href="{{ path('app_home') }}#a-propos" class="btn btn-primary">À propos</a>
             </nav>
          </div>
       </div>
    </div>
 </header>
 
-
-{% block stylesheets%}
-<style>
-   .col:hover {
-      cursor: pointer;
-   }
-   .site-header {
-      margin-bottom: 1rem;
-      border-radius: 0 0 1rem 1rem; 
-   }
-</style>
-
-{% endblock %}
