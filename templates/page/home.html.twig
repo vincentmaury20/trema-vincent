@@ -4,21 +4,31 @@
 
 {% block body %}
 
-   <section class="home-intro container ">
-       <img src="{{ asset('images/coaching.avif') }}"  alt="Coaching" class = "rounded row" />
-       <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" class = "rounded row" />
-       <h2>Tréma signe de coaching</h2>
-     
-   </section>
-   <section class="about">
-       <h3 class="about-title">à propos</h3>
+<section class="home-intro container text-center">
+    <h2>Tréma signe de coaching</h2>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <img src="{{ asset('images/coaching.avif') }}" alt="Coaching" class="rounded img-fluid" />
+      </div>
+      <div class="col-auto">
+        <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" class="rounded img-fluid" />
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+      </div>
+    </div>
+</section>
+   <section class="about container overflow-hidden text-center bg-warning p-2 text-dark bg-opacity-50 p-2 text-white rounded">
+       <h3 class="about-title ">à propos</h3>
        <h4 class="about-subtitle">
            coaching professionnel et supervision de coachs
        </h4>
-       <div class="about-presentation">
+       <div class="about-presentation ">
            <img
                src="{{ asset('images/photo.avif') }}"
                alt="photo de la présentation de la cheffe d'entreprise" class = "rounded"
+               width= "255" heigth= "300"
            />
            <p>
                Formée aux études marketing, Catia Tuccinardi Gouyette fait ses
