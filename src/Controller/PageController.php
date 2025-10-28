@@ -17,7 +17,7 @@ final class PageController extends AbstractController
    /**
     * Affiche la page d'accueil des pages.
     */
-   #[Route('/', name: 'app_page')]
+   #[Route('/', name: 'app_home')]
    public function index(EntityManagerInterface $em): Response
    {
       $page = $em->getRepository(Page::class)->findAll();

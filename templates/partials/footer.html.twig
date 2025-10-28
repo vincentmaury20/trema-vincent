@@ -1,27 +1,9 @@
-{% block body %}
-   <footer class="site-footer">
-      <p>&copy; 2024 Tréma Coaching. Tous droits réservés.</p>
-      <nav class="footer-nav">
-         <div class="footer-social-links">
-            <a href="/#">Instagram</a> |
-            <a href="/#">LinkedIn</a> |
-         </div>
-      </nav>
-   </footer>
-
-{% endblock %}
-
-{% block stylesheets %}
-<style>
-.site-footer {
-   background-color: #f1f1f1;
-   padding: 20px 0;
-   text-align: center;
-   margin-top: 40px;
-   font-size: 14px;
-   color: #d9db3fff;
-   height: 15vh;
-}
-</style>
-
-{% endblock %}
+<footer class="site-footer">
+   <p>&copy; {{ "now"|date('Y') }} Tréma Coaching. Tous droits réservés.</p>
+   <nav class="footer-nav">
+      <div class="footer-social-links">
+         <a href="https://instagram.com/">Instagram</a> |
+         <a href="https://www.linkedin.com/">LinkedIn</a>
+      </div>
+   </nav>
+</footer>

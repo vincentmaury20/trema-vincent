@@ -4,11 +4,11 @@
 
 {% block body %}
 
-   <section class="home-intro">
-       <img src="{{ asset('images/coaching.avif') }}" alt="Coaching" />
+   <section class="home-intro container ">
+       <img src="{{ asset('images/coaching.avif') }}"  alt="Coaching" class = "rounded row" />
+       <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" class = "rounded row" />
        <h2>Tréma signe de coaching</h2>
-       <img src="{{ asset('images/coaching2.avif') }}" alt="Coaching 2" />
-       <!-- il faudra renseigner les textes alternatifs pour les images -->
+     
    </section>
    <section class="about">
        <h3 class="about-title">à propos</h3>
@@ -18,7 +18,7 @@
        <div class="about-presentation">
            <img
                src="{{ asset('images/photo.avif') }}"
-               alt="photo de la présentation de la cheffe d'entreprise"
+               alt="photo de la présentation de la cheffe d'entreprise" class = "rounded"
            />
            <p>
                Formée aux études marketing, Catia Tuccinardi Gouyette fait ses
@@ -76,70 +76,3 @@
 
 
 {% endblock %}
-
-
-{% block stylesheets %}
-   {{ parent() }}
-   <style>
-      body {
-         font-family: "Inter", Arial, sans-serif;
-         background-color: #f8f9fa;
-         color: #333;
-         margin: 0;
-         padding: 0;
-      }
-
-      .page-container {
-         max-width: 800px;
-         margin: 40px auto;
-         background: #fff;
-         border-radius: 12px;
-         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-         padding: 30px;
-      }
-
-      .page-item {
-         border-bottom: 1px solid #eee;
-         padding-bottom: 30px;
-         margin-bottom: 30px;
-      }
-
-      .page-item:last-child {
-         border-bottom: none;
-         margin-bottom: 0;
-         padding-bottom: 0;
-      }
-
-      h1 {
-         font-size: 1.8rem;
-         color: #222;
-         margin-bottom: 10px;
-      }
-
-      h2 {
-         font-size: 1.2rem;
-         color: #666;
-         margin-bottom: 15px;
-         font-weight: 500;
-      }
-
-      p {
-         line-height: 1.6;
-         margin-bottom: 20px;
-      }
-
-      img {
-         display: block;
-         border-radius: 8px;
-         object-fit: cover;
-         margin-top: 10px;
-      }
-
-      .empty-message {
-         text-align: center;
-         padding: 60px 20px;
-         color: #777;
-         font-size: 1.1rem;
-      }
-   </style>
-{% endblock %} 
