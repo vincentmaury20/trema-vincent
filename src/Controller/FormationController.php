@@ -39,8 +39,8 @@ final class FormationController extends AbstractController
     public function show(int $id, EntityManagerInterface $em): Response
     {
         // Je récupère une formation par son identifiant
-        // ⚠️ Correction : j'utilise find() au lieu de findById()
-        $formation = $em->getRepository(Formation::class)->find($id);
+
+        $formation = $em->getRepository(Formation::class)->findById($id);
 
         // Je retourne la vue formation/show.html.twig avec la formation ciblée
         return $this->render('formation/show.html.twig', [

@@ -34,7 +34,7 @@ class FormationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(), // ID non modifiable
             TextField::new('title', 'Titre'),
-            TextEditorField::new('content', 'Description'),
+            TextField::new('content', 'Description'),
             DateTimeField::new('createdAt', 'Date de création')->hideOnForm(),
             BooleanField::new('isPublished', 'Publié'), // si tu ajoutes ce champ dans l'entité
         ];

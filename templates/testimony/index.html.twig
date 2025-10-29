@@ -2,66 +2,75 @@
 
 {% block title %}Les témoignages{% endblock %}
 
+
+
 {% block body %}
-<div class="testimony-wrapper">
-    <h1>Quelques témoignages</h1>
+<div class="testimony-wrapper container">
+    <h2 class="text-center mb-4">Quelques témoignages</h2>
 
     {% if testimony is empty %}
-        <div class="empty-message">
+        <div class="empty-message text-center">
             <p>Aucun témoignage n'est disponible pour le moment.</p>
         </div>
     {% else %}
-        {% for item in testimony %}
-            <article class="testimony-card"> 
-                <h2 class="testimony-title">{{ item.title }}</h2>
-                <div class="testimony-content">
-                    {{ item.content|raw }}
+        <div class="row justify-content-center">
+            {% for item in testimony %}
+                <div class="col-md-6 mb-4">
+                    <article class="testimony-card h-100">
+                        <h3 class="testimony-title">{{ item.title }}</h3>
+                        <div class="testimony-content">
+                            {{ item.content|raw }}
+                        </div>
+                        <div class="text-muted small">
+                            {{ item.date|date('d/m/Y') }}
+                        </div>
+                    </article>
                 </div>
-                <div class="testimony-content">
-                    {{ item.date|date('d/m/Y') }}
-                </div>
-
-            </article>
-        {% endfor %}
+            {% endfor %}
+        </div>
     {% endif %}
 </div>
 {% endblock %}
 
-
 {% block stylesheets %}
-
 <style>
-    .formations-wrapper { margin: 2em auto; max-width: 1000px; width: 95%; }
-    .formation-card { 
-        background: white; 
-        padding: 1.5em; 
-        margin-bottom: 1.5em; 
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .formation-card:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.40);
-        cursor: pointer;
-        background-color: #cabcbcff;
-        transition: background-color 0.3s ease-in-out;
-    }
-    .formation-title { 
-        color: #333; 
-        font-size: 1.5em; 
-        margin-bottom: 0.5em;
-    }
-    .formation-content { 
-        color: #666; 
-        line-height: 1.6;
-    }
-    .actions {
-        margin-top: 1em;
-    }
-    .empty-message {
-        text-align: center;
-        color: #666;
+    .testimony-wrapper {
+        background-color: #f1f3f5; /* gris très clair */
+        border-radius: 1rem;
         padding: 2em;
     }
-</style>
 
+    .testimony-card {
+        background-color: #f8f9fa; /* gris clair Bootstrap */
+        border-radius: 1rem;
+        padding: 1.5em;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .testimony-card:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+    }
+
+    .testimony-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75em;
+        color: #343a40;
+    }
+
+    .testimony-content {
+        color: #495057;
+        line-height: 1.6;
+        margin-bottom: 0.5em;
+    }
+
+    .empty-message {
+        padding: 2em;
+        color: #6c757d;
+        background-color: #e9ecef;
+        border-radius: 1rem;
+    }
+</style>
 {% endblock %}

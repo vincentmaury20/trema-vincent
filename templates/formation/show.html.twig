@@ -3,11 +3,11 @@
 
 {% block body %}
 {%if formation is not empty %}
-   <div class="page-container">
+   <div class="page-container ">
       {% for item in formation %}
          <div class="formation-item">
-            <h1>{{ item.title }}</h1>
-            <p>{{ item.content }}</p>
+            <h1 class= "formation-title" >{{ item.title }}</h1>
+            <p class="formation-content" > {{ item.content }}</p>
          </div>
       {% endfor %}
    </div>
@@ -22,69 +22,3 @@
 
 {% endblock %}
 
-
-{% block stylesheets %}
-   {{ parent() }}
-   <style>
-      body {
-         font-family: "Inter", Arial, sans-serif;
-         background-color: #f8f9fa;
-         color: #333;
-         margin: 0;
-         padding: 0;
-      }
-
-      .page-container {
-         max-width: 800px;
-         margin: 40px auto;
-         background: #fff;
-         border-radius: 12px;
-         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-         padding: 30px;
-      }
-
-      .page-item {
-         border-bottom: 1px solid #eee;
-         padding-bottom: 30px;
-         margin-bottom: 30px;
-      }
-
-      .page-item:last-child {
-         border-bottom: none;
-         margin-bottom: 0;
-         padding-bottom: 0;
-      }
-
-      h1 {
-         font-size: 1.8rem;
-         color: #222;
-         margin-bottom: 10px;
-      }
-
-      h2 {
-         font-size: 1.2rem;
-         color: #666;
-         margin-bottom: 15px;
-         font-weight: 500;
-      }
-
-      p {
-         line-height: 1.6;
-         margin-bottom: 20px;
-      }
-
-      img {
-         display: block;
-         border-radius: 8px;
-         object-fit: cover;
-         margin-top: 10px;
-      }
-
-      .empty-message {
-         text-align: center;
-         padding: 60px 20px;
-         color: #777;
-         font-size: 1.1rem;
-      }
-   </style>
-{% endblock %} 
