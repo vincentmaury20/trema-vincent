@@ -432,3 +432,6 @@ Page par page:
 -   faire des liens avec "mes outils", "certifications" etc dans la zone des 'à propos'
 -   apporter un peu plus de style à la page des formations
 -   ajout de la partie contact également quand on se rend sur une formation
+
+
+__J'ai dû réinstaller composer car il ne retrouvait pas mon bin.... 
