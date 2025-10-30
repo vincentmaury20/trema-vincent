@@ -4,19 +4,35 @@
 
 {% block body %}
 
-    <h1 class="text-center mb-4">Me contacter</h1>  
-    {{ form_start(form) }}
+<div class="container mt-5"> 
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Contact</h5>
 
-        <div class='row'>
+          {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
 
-            <div class="col-sm">{{ form_row(form.name) }}</div>
-            <div class="col-sm">{{ form_row(form.email) }}</div>
-        
+          <div class="mb-3">
+            {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+          </div>
+
+          <div class="mb-3">
+            {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+          </div>
+
+          <div class="mb-3">
+            {{ form_row(form.message, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+
+          {{ form_end(form) }}
         </div>
-
-
-
-    {{ form_end(form) }}
-
-
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
