@@ -79,17 +79,6 @@
       </div>
     </section>
     </section>
-    {% block javascripts %}
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            if (window.location.hash === "#a-propos") {
-              const target = document.getElementById("a-propos");
-              if (target) {
-                target.scrollIntoView({ behavior: "smooth" });
-              }
-            }
-          });
-        </script>
-    {% endblock %}
+
 
 {% endblock %}
