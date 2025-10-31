@@ -27,3 +27,17 @@ framework:
 
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
+# Ce fichier configure le composant Messenger de Symfony, que je peux utiliser pour gérer des messages asynchrones dans mon application.
+# Il définit plusieurs "transports", c’est-à-dire des canaux par lesquels les messages circulent :
+# - async : pour envoyer les messages dans une file d’attente (ex : RabbitMQ, Doctrine, etc.)
+# - failed : pour stocker les messages qui ont échoué (ici, dans la base de données)
+# - sync : pour traiter les messages immédiatement, sans passer par une file
+
+# La variable d’environnement MESSENGER_TRANSPORT_DSN (dans le fichier .env) permet de définir comment Symfony doit se connecter au transport async.
+
+# La section routing sert à dire quel type de message doit passer par quel transport :
+# - Les emails (SendEmailMessage) sont envoyés en mode sync
+# - Les messages de chat et les SMS aussi (ChatMessage, SmsMessage)
+
+# Pour l’instant je ne l’utilise pas encore dans mon site, mais ce fichier est prêt à être activé si je veux ajouter des messages ou des tâches en arrière-plan plus tard.
+# Par exemple : envoyer un email sans bloquer l’utilisateur, ou traiter des formulaires lourds en tâche de fond.

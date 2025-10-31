@@ -1,3 +1,8 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+
+# Ce fichier configure le service d'envoi d'emails dans Symfony.
+# La valeur du DSN est récupérée depuis la variable d'environnement MAILER_DSN définie dans le fichier .env.
+# En développement, on peut utiliser une fausse boîte mail comme Mailpit ou MailHog, en précisant le port dans MAILER_DSN.
+# Attention : ne jamais commiter les identifiants ou variables sensibles (.env.local doit rester privé).😅

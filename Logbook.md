@@ -401,7 +401,7 @@ Voici une description en français du rôle des principaux dossiers et fichiers 
 -   `tests/` : tests PHPUnit.
 -   `translations/` : fichiers de traduction pour l'internationalisation.
 
-Pour l'espérience user il faudrait que je fasse un dashboard qui afficherait des liens vers les pages de création de pages, formations, gestion des social medias etc.
+Pour l'expérience user il faudrait que je fasse un dashboard qui afficherait des liens vers les pages de création de pages, formations, gestion des social medias etc.
 
 # Dimanche 26/10
 
@@ -409,9 +409,9 @@ Je commence par mettre en place ce dashboard dont Lauréanne m'a parlé,
 
 Pour "terminer" le projet il me faut :
 
-1. Trouver la solution au problème de l'affichage du logo différent sur certaines pages
+1. Trouver la solution au problème de l'affichage du logo différent sur certaines pages✅
 2. Gérer les témoignages de manière 'joli'✅
-3. Faire une page contact avec formulaire
+3. Faire une page contact avec formulaire✅
 4. Gestion des erreurs avec symfony
 5. Mettre des logos cliquables d'insta et linkedin ✅
 6. La page des formations est gérée en css pur mais voir si bootstrapper✅
@@ -433,5 +433,91 @@ Page par page:
 -   apporter un peu plus de style à la page des formations
 -   ajout de la partie contact également quand on se rend sur une formation
 
+**J'ai dû réinstaller composer car il ne retrouvait pas mon bin/console....**
 
-__J'ai dû réinstaller composer car il ne retrouvait pas mon bin.... 
+J'ai dû le réinstaller à la main
+
+# Vendredi 31/10
+
+# Implémentation d’un formulaire de contact avec envoi d’email (Symfony)
+
+## Vue d’ensemble — composants à mettre en place
+
+-   **Transporteur mail** : configuration `MAILER_DSN` pour dev / prod / test
+-   **FormType** : `ContactType` décrivant les champs du formulaire
+-   **DTO** : `ContactDTO` contenant les données + contraintes de validation
+-   **Controller** : `ContactController` pour créer le formulaire, valider, envoyer le mail
+-   **Templates Twig** :
+    -   `index.html.twig` pour le formulaire
+    -   `contact.html.twig` pour le contenu du mail
+
+## Configuration des environnements
+
+### `.env` (développement par défaut)
+
+```env
+MAILER_DSN=smtp://USER:PASS@smtp.example.com:587
+```
+
+### `.env.local` (override local)
+
+-   Contient les identifiants SMTP réels (non versionnés)
+-   Exemple avec Mailpit (sans Docker) :
+
+```powershell
+cd chemin/vers/le/projet
+./mailpit
+```
+
+```env
+MAILER_DSN=smtp://localhost:1025
+```
+
+-   Interface Mailpit : http://127.0.0.1:8025
+
+### `.env.test` (environnement de test)
+
+```env
+MAILER_DSN=null://null
+```
+
+## Implémentation — fichiers principaux
+
+### `ContactDTO.php`
+
+-   Propriétés privées : `name`, `email`, `message`
+-   Contraintes `#[Assert\NotBlank]`, `#[Assert\Email]`, etc.
+-   Getters & setters utilisés par Symfony via `handleRequest`
+
+### `ContactType.php`
+
+-   Champs : `name`, `email`, `message`
+-   Options : `empty_data`, labels, etc.
+
+### `ContactController.php`
+
+-   Création du DTO
+-   Création du formulaire :
+
+```php
+$form = $this->createForm(ContactType::class, $dto);
+$form->handleRequest($request);
+```
+
+-   Si valide :
+    -   Création d’un `TemplatedEmail`
+    -   Envoi via `$mailer->send($email)`
+    -   Flash message + redirection
+
+### Templates Twig
+
+-   `index.html.twig` : affichage du formulaire
+-   `contact.html.twig` : contenu HTML de l’email
+
+---
+
+## Pourquoi le "mapping" fonctionne
+
+-   Symfony lie les champs du formulaire aux propriétés du DTO
+-   Lors du `handleRequest`, Symfony appelle les setters (`setName`, etc.)
+-   Après soumission, `$form->getData()` retourne l’objet DTO rempli

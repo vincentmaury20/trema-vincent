@@ -42,6 +42,8 @@ class FormationRepository extends ServiceEntityRepository
     //    }
 }
 
-// Repository chargé des opérations de lecture/écriture pour l'entité "Formation".
-// Il fournit un point central pour construire des requêtes personnalisées et
-// récupérer des objets Formation depuis la base de données via Doctrine.
+// Ce fichier est le repository associé à l’entité Formation.
+// Il me permet de créer des requêtes personnalisées pour aller chercher des objets Formation dans la base de données.
+// Par défaut, il hérite des méthodes classiques (find, findAll, findBy...) grâce à ServiceEntityRepository.
+// Je peux aussi y ajouter mes propres méthodes, comme "findPublished" ou "findRecent", pour filtrer les résultats selon mes besoins.
+// C’est un point central pour gérer la logique d’accès aux données liées à l’entité Formation.

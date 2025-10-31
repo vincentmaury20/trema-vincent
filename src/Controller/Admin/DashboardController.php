@@ -38,7 +38,6 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Pages', 'fa fa-file', Page::class);
         yield MenuItem::linkToCrud('Formations', 'fa fa-graduation-cap', Formation::class);
-        yield MenuItem::linkToCrud('Liens sociaux', 'fa fa-link', SocialLink::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
         yield MenuItem::linkToCrud('Témoignages', 'fa fa-testimony', Testimony::class);
 
@@ -50,3 +49,23 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }
+
+// Ce fichier configure le tableau de bord de l’administration avec EasyAdmin.
+// Grâce à l’attribut #[AdminDashboard], je définis que l’interface admin sera accessible via la route "/admin".
+
+// La méthode index() est appelée quand j’accède à /admin.
+// Elle redirige automatiquement vers le CRUD des pages (PageCrudController), ce qui me permet d’atterrir directement sur une section utile.
+
+// La méthode configureDashboard() me permet de personnaliser le titre affiché en haut du dashboard. Ici, j’ai mis "Trema Vincent".
+
+// La méthode configureMenuItems() définit le menu latéral de l’interface admin.
+// Je crée des sections (ex : "Gestion du contenu") et j’ajoute des liens vers les entités que je veux gérer en CRUD :
+// - Pages
+// - Formations
+// - Utilisateurs
+// - Témoignages
+
+// Je peux aussi ajouter des liens vers l’accueil admin ou la déconnexion.
+
+// En résumé : ce fichier me permet de construire une interface d’administration complète,
+// avec des routes bien séparées du site public, pour gérer mes contenus facilement.

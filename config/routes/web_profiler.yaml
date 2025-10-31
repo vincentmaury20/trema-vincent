@@ -1,8 +1,12 @@
 when@dev:
     web_profiler_wdt:
-        resource: '@WebProfilerBundle/Resources/config/routing/wdt.php'
+        resource: "@WebProfilerBundle/Resources/config/routing/wdt.php"
         prefix: /_wdt
 
     web_profiler_profiler:
-        resource: '@WebProfilerBundle/Resources/config/routing/profiler.php'
+        resource: "@WebProfilerBundle/Resources/config/routing/profiler.php"
         prefix: /_profiler
+# Ce bloc configure les routes du Web Profiler, mais uniquement en environnement de développement.
+# Il permet d’activer la barre de debug Symfony (/_wdt) et l’interface complète du profiler (/_profiler).
+# Grâce à ça, je peux voir les infos sur les requêtes, les erreurs, les mails, les logs, etc. pendant que je développe.
+# Ces routes ne sont pas accessibles en production, ce qui est normal pour des raisons de sécurité.

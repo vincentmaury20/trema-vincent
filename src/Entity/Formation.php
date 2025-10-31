@@ -74,8 +74,17 @@ class Formation
         $this->createdAt = new \DateTimeImmutable();
     }
 }
+// Cette classe représente l’entité "Formation" utilisée par Doctrine pour gérer les données en base.
+// Elle définit les propriétés que je veux stocker :
+// - id : identifiant unique, auto-généré
+// - title : titre de la formation
+// - content : description détaillée
+// - isPublished : booléen pour savoir si la formation est visible ou non
+// - createdAt : date de création, automatiquement définie à l’instanciation
 
-// Cette classe représente l'entité "Formation" utilisée par Doctrine.
-// Elle définit les propriétés persistées (id, title, content) et
-// fournit les accesseurs/modificateurs (getters/setters) nécessaires
-// pour manipuler les données d'une formation dans l'application.
+// Grâce aux annotations #[ORM\Column], Symfony sait comment mapper chaque propriété à une colonne SQL.
+
+// Les méthodes get/set me permettent d’accéder et de modifier les données de chaque propriété.
+// Le constructeur initialise automatiquement la date de création avec la date du jour.
+
+// Cette entité est utilisée dans EasyAdmin pour créer, modifier et afficher les formations dans le back-office.

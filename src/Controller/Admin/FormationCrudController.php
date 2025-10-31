@@ -39,3 +39,21 @@ class FormationCrudController extends AbstractCrudController
         ];
     }
 }
+// Ce fichier configure l’interface d’administration pour l’entité Formation avec EasyAdmin.
+// Il permet de définir comment les formations seront affichées, créées et modifiées dans le back-office.
+
+// La méthode getEntityFqcn() indique à EasyAdmin quelle entité est concernée ici : Formation.
+
+// La méthode configureCrud() me permet de personnaliser l’affichage :
+// - Je définis les titres des pages (liste, création, modification)
+// - Je choisis le libellé au singulier et au pluriel
+// - Je fixe le nombre d’éléments par page (ici 20)
+
+// La méthode configureFields() déclare les champs que je veux afficher ou modifier dans le formulaire admin :
+// - L’ID est affiché dans la liste mais caché dans le formulaire (car il est auto-généré)
+// - Le titre et la description sont des champs texte classiques
+// - La date de création est affichée mais non modifiable
+// - Le champ "Publié" est un booléen (case à cocher), à condition qu’il existe dans l’entité Formation
+
+// Grâce à ce fichier, je contrôle précisément ce que l’administrateur peut voir et modifier pour chaque formation.
+// C’est un bon moyen de garder une interface claire et sécurisée.

@@ -18,3 +18,17 @@ if (file_exists(dirname(__DIR__) . '/.env')) {
 $kernel = new Kernel($_SERVER['APP_ENV'] ?? 'dev', (bool) ($_SERVER['APP_DEBUG'] ?? true));
 $application = new Application($kernel);
 $application->run();
+
+
+// Ce fichier est le point d’entrée pour la console Symfony (bin/console).
+// Il permet d’exécuter toutes les commandes Symfony via le terminal.
+// Exemple : php bin/console cache:clear, make:controller, etc.
+
+// Il charge l’autoloader Composer pour que toutes les classes soient accessibles.
+// Il vérifie que la classe Kernel existe, sinon il affiche une erreur explicite.
+
+// Il charge les variables d’environnement depuis le fichier .env (si présent).
+// Cela permet de définir APP_ENV, APP_DEBUG, et autres paramètres de config.
+
+// Ensuite, il instancie le noyau Symfony (Kernel) avec l’environnement et le mode debug.
+// Puis il crée une application console Symfony et l’exécute avec $application->run().

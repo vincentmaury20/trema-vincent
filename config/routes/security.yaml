@@ -1,4 +1,7 @@
 _security_logout:
     resource: security.route_loader.logout
     type: service
-# c'est un bloc de config qui sert à déclarer la route de logout (déconnexion), cela crée automatiquement une route "/logout", sans avoir à l'écrire manuellement
+# Ce bloc de configuration déclare automatiquement la route de déconnexion "/logout".
+# Je n’ai pas besoin de l’écrire moi-même dans mes fichiers de routing, Symfony la génère grâce à ce loader.
+# Cette route est activée dès que j’utilise le système de sécurité avec authentification, notamment quand je mets en place le LoginFormAuthenticator.
+# Elle permet à l’utilisateur connecté de se déconnecter simplement en accédant à /logout.

@@ -58,3 +58,23 @@ class ContactDTO
       return $this;
    }
 }
+// Cette classe représente un DTO (Data Transfer Object) pour le formulaire de contact de mon site.
+// Elle ne correspond pas à une entité stockée en base de données, mais sert uniquement à transporter les données saisies par l’utilisateur.
+
+// Elle contient trois propriétés :
+// - name : le nom de l’expéditeur
+// - email : son adresse email
+// - message : le contenu du message
+
+// Chaque propriété est annotée avec des contraintes de validation Symfony (Assert\...).
+// Ces contraintes permettent de vérifier que l’utilisateur a bien rempli le formulaire correctement :
+// - NotBlank : le champ ne doit pas être vide
+// - Length : impose une longueur minimale (et maximale pour le nom)
+// - Email : vérifie que l’adresse email est bien au bon format
+
+// Ces règles sont automatiquement appliquées quand je lie ce DTO à un formulaire Symfony.
+// Si une règle n’est pas respectée, un message d’erreur personnalisé est affiché à l’utilisateur.
+
+// Les getters/setters permettent à Symfony de lire et d’écrire les données dans l’objet pendant le traitement du formulaire.
+
+// En résumé : ce DTO me permet de structurer et valider les données d’un formulaire de contact sans avoir besoin de créer une entité Doctrine.
