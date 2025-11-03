@@ -513,12 +513,39 @@ $form->handleRequest($request);
 
 ---
 
-# Reprise de réflexion sur le site
+# Suivi de mon avancement — Projet Tréma
 
--   Voir les entités, si il y a besoin de les revoir et compléter ou retravailler complétement
--   Permettre au client d'avoir plus la main mise sur les modifs applicables sur son site et création de pages etc...
--   Témoignages gérer mieux les grids et le style
--   Faire des liens avec "mes outils", "certifications" etc dans la zone des 'à propos'
--   Apporter un peu plus de style à la page des formations
--   Ajout de la partie contact également quand on se rend sur une formation
--   Ajouter une page et pourquoi pas que ce soit la client qui soit à l'honnneur pour la construire
+## Ce que j’ai déjà mis en place
+
+-   J’ai créé les entités principales : `Formation`, `Page`, `Testimony`, `User`
+-   J’ai mis en place les CRUD EasyAdmin pour toutes ces entités
+-   J’ai sécurisé l’accès au back-office avec un login fonctionnel (`LoginFormAuthenticator`)
+-   J’ai structuré le formulaire de témoignage (`TestimonyType`)
+-   J’ai une route d’affichage des témoignages côté front (`/testimony`)
+-   J’ai configuré l’envoi d’email via le formulaire de contact avec DTO, FormType et Mailer
+-   J’ai structuré le projet proprement (BDD, migrations, arborescence, etc.)
+
+## Ce qu’il me reste à faire
+
+| Tâche                                                   | Statut      | Action à faire                                                                |
+| ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
+| Soumission de témoignage par les visiteurs              | À faire     | Ajouter la méthode `new()` + créer le template `new.html.twig`                |
+| Filtrer les témoignages affichés (`isPublished = true`) | À faire     | Modifier `index()` dans `TestimonyController` pour n’afficher que les validés |
+| Ajouter le champ `isPublished` dans `Testimony`         | À faire     | Modifier l’entité + afficher dans EasyAdmin                                   |
+| Afficher le lien vers le BO dans le header              | À faire     | Ajouter conditionnel dans `header.html.twig` avec `is_granted('ROLE_ADMIN')`  |
+| CRUD pour `SocialLink`                                  | À faire     | Générer le `SocialLinkCrudController` + configurer les champs                 |
+| Ajout du champ `slug` dans `Formation` (optionnel)      | À envisager | Permettre des URLs propres + routing dynamique                                |
+| Ajouter des validations dans les entités                | À faire     | Contraintes Symfony (`NotBlank`, `Length`, etc.)                              |
+| Créer les vues Twig                                     | À faire     | Templates pour chaque entité et chaque page                                   |
+| Sécuriser les routes admin                              | À faire     | Vérifier `security.yaml` + restreindre avec `ROLE_ADMIN`                      |
+| Nettoyer le projet                                      | À faire     | Supprimer les fichiers inutiles + faire une review du code                    |
+| Créer un dashboard admin clair                          | En cours    | Ajouter des liens vers les pages de gestion dans le BO                        |
+| Masquer les blocs vides dans le front                   | À faire     | Éviter les affichages moches si un champ n’est pas rempli                     |
+
+## Priorités pour demain
+
+1. Finaliser la soumission de témoignage côté front
+2. Ajouter le champ `isPublished` et filtrer les témoignages affichés
+3. Intégrer le lien vers le BO dans le header
+4. Générer le CRUD pour `SocialLink` si je décide de le garder
+5. Commencer à créer les templates Twig manquants
