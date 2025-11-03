@@ -521,3 +521,20 @@ $form->handleRequest($request);
 -   Symfony lie les champs du formulaire aux propriétés du DTO
 -   Lors du `handleRequest`, Symfony appelle les setters (`setName`, etc.)
 -   Après soumission, `$form->getData()` retourne l’objet DTO rempli
+
+# Reprise de réflexion sur le site
+
+-   Voir les entités, si il y a besoin de les revoir et compléter ou retravailler complétement
+-   Permettre au client d'avoir plus la main mise sur les modifs applicables sur son site et création de pages etc...
+-   Témoignages gérer mieux les grids et le style
+-   sur la page d'accueil il faut mieux gérer aussi les thématiques, il prend trop de place actuellement
+-   Toujours résoudre ce problème d'affichage , carrément de css que la page d'accueil n'arrive pas à lire
+-   Toujours afficher un texte et rotation des cards dans cette page d'accueil
+-   Toujours faire cette page d'accueil avec l'aide de la vidéo de Grafikart
+-   Faire des liens avec "mes outils", "certifications" etc dans la zone des 'à propos'
+-   Apporter un peu plus de style à la page des formations
+-   Ajout de la partie contact également quand on se rend sur une formation
+-   Ajouter une page et pourquoi pas que ce soit la client qui soit à l'honnneur pour la construire
+-
+-
+-
