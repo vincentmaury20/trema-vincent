@@ -511,6 +511,8 @@ $form->handleRequest($request);
 -   Lors du `handleRequest`, Symfony appelle les setters (`setName`, etc.)
 -   Après soumission, `$form->getData()` retourne l’objet DTO rempli
 
+---
+
 # Reprise de réflexion sur le site
 
 -   Voir les entités, si il y a besoin de les revoir et compléter ou retravailler complétement

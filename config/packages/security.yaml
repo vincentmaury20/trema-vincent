@@ -55,3 +55,5 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+# ce fichier est généré par symfony flex pour gérrer la sécurité de l'application ou du site web.
+# Il définit les règles de sécurité, les fournisseurs d'utilisateurs, les pare-feux et les contrôles d'accès.
