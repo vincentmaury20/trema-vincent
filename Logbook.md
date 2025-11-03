@@ -415,23 +415,12 @@ Pour "terminer" le projet il me faut :
 4. Gestion des erreurs avec symfony
 5. Mettre des logos cliquables d'insta et linkedin ✅
 6. La page des formations est gérée en css pur mais voir si bootstrapper✅
-7. Faire une review du code entier
+7. Faire une review du code entier✅
 8. Nettoyer en enlevant les fichiers et dossiers dont je n'ai plus besoin
-9. Regarder si, des animations pas trop lourdes (révisions...) sont possiblement exploitables, ou si j'ai envie
-10. Ajouter un text cliquable au moment du hover sur les images de la page d'accueil
+9. Regarder si, des animations pas trop lourdes (révisions...) sont possiblement exploitables, ou si j'ai envie✅
+10. Ajouter un text cliquable au moment du hover sur les images de la page d'accueil✅
 
 aller voir sur le site des animations css que j'ai mis dans PHP apprentissage
-
-Page par page:
-
--   Témoignages gérer mieux les grids et le style
--   sur la page d'accueil il faut mieux gérer aussi les thématiques, il prend trop de place actuellement
--   toujours résoudre ce problème d'affichage , carrément de css que la page d'accueil n'arrive pas à lire
--   toujours afficher un texte et rotation des cards dans cette page d'accueil
--   toujours faire cette page d'accueil avec l'aide de la vidéo de Grafikart
--   faire des liens avec "mes outils", "certifications" etc dans la zone des 'à propos'
--   apporter un peu plus de style à la page des formations
--   ajout de la partie contact également quand on se rend sur une formation
 
 **J'ai dû réinstaller composer car il ne retrouvait pas mon bin/console....**
 
@@ -527,14 +516,7 @@ $form->handleRequest($request);
 -   Voir les entités, si il y a besoin de les revoir et compléter ou retravailler complétement
 -   Permettre au client d'avoir plus la main mise sur les modifs applicables sur son site et création de pages etc...
 -   Témoignages gérer mieux les grids et le style
--   sur la page d'accueil il faut mieux gérer aussi les thématiques, il prend trop de place actuellement
--   Toujours résoudre ce problème d'affichage , carrément de css que la page d'accueil n'arrive pas à lire
--   Toujours afficher un texte et rotation des cards dans cette page d'accueil
--   Toujours faire cette page d'accueil avec l'aide de la vidéo de Grafikart
 -   Faire des liens avec "mes outils", "certifications" etc dans la zone des 'à propos'
 -   Apporter un peu plus de style à la page des formations
 -   Ajout de la partie contact également quand on se rend sur une formation
 -   Ajouter une page et pourquoi pas que ce soit la client qui soit à l'honnneur pour la construire
--
--
--
