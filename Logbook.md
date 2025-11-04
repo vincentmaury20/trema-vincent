@@ -527,20 +527,21 @@ $form->handleRequest($request);
 
 ## Ce qu’il me reste à faire
 
-| Tâche                                                   | Statut      | Action à faire                                                                |
-| ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
-| Soumission de témoignage par les visiteurs              | À faire     | Ajouter la méthode `new()` + créer le template `new.html.twig`                |
-| Filtrer les témoignages affichés (`isPublished = true`) | À faire     | Modifier `index()` dans `TestimonyController` pour n’afficher que les validés |
-| Ajouter le champ `isPublished` dans `Testimony`         | À faire     | Modifier l’entité + afficher dans EasyAdmin                                   |
-| Afficher le lien vers le BO dans le header              | À faire     | Ajouter conditionnel dans `header.html.twig` avec `is_granted('ROLE_ADMIN')`  |
-| CRUD pour `SocialLink`                                  | À faire     | Générer le `SocialLinkCrudController` + configurer les champs                 |
-| Ajout du champ `slug` dans `Formation` (optionnel)      | À envisager | Permettre des URLs propres + routing dynamique                                |
-| Ajouter des validations dans les entités                | À faire     | Contraintes Symfony (`NotBlank`, `Length`, etc.)                              |
-| Créer les vues Twig                                     | À faire     | Templates pour chaque entité et chaque page                                   |
-| Sécuriser les routes admin                              | À faire     | Vérifier `security.yaml` + restreindre avec `ROLE_ADMIN`                      |
-| Nettoyer le projet                                      | À faire     | Supprimer les fichiers inutiles + faire une review du code                    |
-| Créer un dashboard admin clair                          | En cours    | Ajouter des liens vers les pages de gestion dans le BO                        |
-| Masquer les blocs vides dans le front                   | À faire     | Éviter les affichages moches si un champ n’est pas rempli                     |
+| Tâche                                                   | Statut      | Action à faire                                                                                                  |
+| ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| Soumission de témoignage par les visiteurs              | OK          | Ajouter la méthode `new()` + créer le template `new.html.twig`                                                  |
+| Filtrer les témoignages affichés (`isPublished = true`) | OK          | Modifier `index()` dans `TestimonyController` pour n’afficher que les validés                                   |
+| Ajouter le champ `isPublished` dans `Testimony`         | OK          | Modifier l’entité + afficher dans EasyAdmin                                                                     |
+| Comportement de la soumission du formulaire             | A faire     | On reste sur la même page lors de la soumission pour le moment et le champs ne sont même pas vidés par la suite |
+| Afficher le lien vers le BO dans le header              | À faire     | Ajouter conditionnel dans `header.html.twig` avec `is_granted('ROLE_ADMIN')`                                    |
+| CRUD pour `SocialLink`                                  | À faire     | Générer le `SocialLinkCrudController` + configurer les champs                                                   |
+| Ajout du champ `slug` dans `Formation` (optionnel)      | À envisager | Permettre des URLs propres + routing dynamique                                                                  |
+| Ajouter des validations dans les entités                | À faire     | Contraintes Symfony (`NotBlank`, `Length`, etc.)                                                                |
+| Créer les vues Twig                                     | À faire     | Templates pour chaque entité et chaque page                                                                     |
+| Sécuriser les routes admin                              | À faire     | Vérifier `security.yaml` + restreindre avec `ROLE_ADMIN`                                                        |
+| Nettoyer le projet                                      | À faire     | Supprimer les fichiers inutiles + faire une review du code                                                      |
+| Créer un dashboard admin clair                          | En cours    | Ajouter des liens vers les pages de gestion dans le BO                                                          |
+| Masquer les blocs vides dans le front                   | À faire     | Éviter les affichages moches si un champ n’est pas rempli                                                       |
 
 ## Priorités pour demain
 

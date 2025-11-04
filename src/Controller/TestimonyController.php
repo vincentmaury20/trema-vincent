@@ -15,7 +15,7 @@ final class TestimonyController extends AbstractController
    #[Route('/testimony', name: 'app_testimony')]
    public function index(EntityManagerInterface $em): Response
    {
-      $testimony = $em->getRepository(Testimony::class)->findAll();
+      $testimony = $em->getRepository(Testimony::class)->findBy(['isPublished' => true]);
       return $this->render('testimony/index.html.twig', [
          'controller_name' => 'TestimonyController',
          'testimony' => $testimony,
