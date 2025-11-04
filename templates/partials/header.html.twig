@@ -6,20 +6,20 @@
             <h2 class="lead">Coaching professionnel</h2>
          </div>
          <div class="col text-end">
-            <nav class="header-nav">
-               <a href="{{ path('app_formation') }}" class="btn btn-primary" >Formations</a> 
-               <a href="{{ path('app_contact') }}" class="btn btn-primary">Contact</a> 
-               <a href="{{ path('app_testimony') }}" class="btn btn-primary">Témoignages</a>
-               <a href="{{ path('app_testimony_new') }}" class="btn btn-primary">Déposer un témoignage</a>
-               {% if is_granted('ROLE_ADMIN') %}
-               <a href="{{ path('admin') }}" class="btn btn-primary">Admin</a>
-
-               {% endif %}
-               
-               {# <a href="{{ path('app_home') }}#a-propos" class="btn btn-primary">À propos</a>
-               A la reflexion car peut-être une page sera plus simple  pour le moment  #}
-
-            </nav>
+            <div class="btn-group">
+              <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                Menu
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ path('app_formation') }}">Formations</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_contact') }}">Contact</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_testimony') }}">Témoignages</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_testimony_new') }}">Déposer un témoignage</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a class="dropdown-item" href="{{ path('admin') }}">Admin</a></li>
+                {% endif %}
+              </ul>
+            </div>
          </div>
       </div>
    </div>

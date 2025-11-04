@@ -33,6 +33,7 @@
 {% endblock %}
 
 {% block stylesheets %}
+{{ parent()}} {# attention au placement de parent(), car sinon le style ne sera pas du tout chargé et donc pas appliqué ! #}
 <style>
     .testimony-wrapper {
         background-color: #f1f3f5; /* gris très clair */

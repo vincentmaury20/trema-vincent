@@ -28,11 +28,22 @@ final class TestimonyController extends AbstractController
       $testimony = new Testimony(); // la variable $testimony est une nouvelle instance de l'entité Testimony
 
       $form = $this->createForm(TestimonyType::class, $testimony); // je crée un formulaire basé sur la classe de testimonyType et lié à l'entité $testimony
-      $form->handleRequest($request); // la méthode handleRequest permet de traiter la requête et de remplir le formulaire avec les données rentrées par le user
+      $form->handleRequest($request);
+
+      // Debug : affiche l'état du formulaire et les erreurs éventuelles
+      if ($form->isSubmitted()) {
+         dump([
+            'isValid' => $form->isValid(),
+            'errors' => iterator_to_array($form->getErrors(true)),
+            'data' => $form->getData()
+         ]);
+      }
 
       if ($form->isSubmitted() && $form->isValid()) {
+         $testimony->setIsPublished(false); // par défaut non publié
          $em->persist($testimony);
          $em->flush();
+         dump($testimony);
 
          return $this->redirectToRoute('app_testimony');
       }
