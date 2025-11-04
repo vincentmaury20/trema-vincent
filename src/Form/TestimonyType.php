@@ -6,7 +6,7 @@ use App\Entity\Testimony;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class TestimonyType extends AbstractType
 {
@@ -16,9 +16,12 @@ class TestimonyType extends AbstractType
             ->add('date')
             ->add('title')
             ->add('content')
-            ->add('submit', SubmitType::class, [
-                'label' => 'Partager mon avis',
-            ]);
+            ->add('author')
+            // ajouter un bouton de soumission
+            ->add("submit", \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, [
+                'label' => 'Soumettre le témoignage'
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

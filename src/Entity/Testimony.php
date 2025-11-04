@@ -31,6 +31,10 @@ class Testimony
     #[Assert\NotBlank(message: "Le contenu est obligatoire.")]
     private ?string $content = null;
 
+    #[ORM\Column(length: 5000)]
+    #[Assert\NotBlank(message: "Le contenu est obligatoire.")]
+    private ?string $author = null;
+
     // Nom du témoin — obligatoire
     #[ORM\Column(length: 5000)]
     #[Assert\NotBlank(message: "Le nom du témoin est obligatoire.")]
@@ -40,6 +44,10 @@ class Testimony
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isPublished = false;
+
+
     // Constructeur : initialise automatiquement la date de création
     public function __construct()
     {
@@ -47,6 +55,18 @@ class Testimony
     }
 
     // Getters / Setters
+
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
@@ -94,6 +114,16 @@ class Testimony
     public function setName(string $name): static
     {
         $this->name = $name;
+        return $this;
+    }
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): static
+    {
+        $this->author = $author;
         return $this;
     }
 

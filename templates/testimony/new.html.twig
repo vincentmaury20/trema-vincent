@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les témoignages{% endblock %}
+
+
+
+{% block body %}
+<div class="container mt-5"> 
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Déposer un témoignage</h5>
+
+          {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+          <div class="mb-3">
+            {{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
+          </div>
+
+          <div class="mb-3">
+            {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+          </div>
+
+          <div class="mb-3">
+            {{ form_row(form.content, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+          </div>
+          <div class="mb-3">
+            {{ form_row(form.author, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+          </div>
+
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+/* TODO: Il faudra ajouter du style plus tard */
+</style>
+{% endblock %}
