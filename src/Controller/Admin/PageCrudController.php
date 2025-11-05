@@ -41,7 +41,7 @@ class PageCrudController extends AbstractCrudController
                 ->setBasePath('uploads/images')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
                 ->setRequired(false),
-            BooleanField::new('Published', 'Publié'),
+            BooleanField::new('published', 'Publié'),
         ];
     }
 }

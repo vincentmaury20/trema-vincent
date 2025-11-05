@@ -30,8 +30,7 @@ final class PageController extends AbstractController
    #[Route('/page/{slug}', name: 'app_page_show')]
    public function showBySlug(string $slug, EntityManagerInterface $em): Response
    {
-      $page = $em->getRepository(Page::class)->findOneBy(['slug' => $slug]);
-
+      $page = $em->getRepository(Page::class)->findOneBy(['slug' => $slug, 'published' => true]);
       if (!$page) {
          throw $this->createNotFoundException('La page demandée n\'existe pas.');
       }
