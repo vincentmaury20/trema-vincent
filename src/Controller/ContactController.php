@@ -18,12 +18,6 @@ final class ContactController extends AbstractController
     {
         $data = new ContactDTO();
 
-        // // TODO: Supprimer ça plus tard
-        // $data->setName("John Doe");
-        // $data->setEmail("john.doe@example.com");
-        // $data->setMessage("Bonjour, je souhaite vous contacter.");
-
-
         $form = $this->createForm(ContactType::class, $data);
         $form->handleRequest($request);
 
@@ -37,7 +31,7 @@ final class ContactController extends AbstractController
 
             $mailer->send($mail);
             $this->addFlash('success', 'Votre message a bien été envoyé !');
-            return $this->redirectToRoute('app_contact');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('contact/index.html.twig', [

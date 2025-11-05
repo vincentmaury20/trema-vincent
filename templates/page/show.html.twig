@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+{% if page is not empty %}
+   {{ page.subtitle|raw }}
+
+   {{ page.content|raw }}
+
+   {{ page.image ? '<img src="/uploads/images/' ~ page.image ~ '" alt="' ~ page.title ~ '" class="img-fluid my-4"/>'|raw : '' }}
+{% endif %}
+{% if page is empty %}
+   <div class="empty-message">
+      <p>Cette page est vide pour le moment.</p>
+   </div>
+{% endif %}
+{% endblock %}

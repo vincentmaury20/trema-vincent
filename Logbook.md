@@ -540,3 +540,5 @@ $form->handleRequest($request);
 | Nettoyer le projet                                      | À faire     | Supprimer les fichiers inutiles + faire une review du code                    |
 | Créer un dashboard admin clair                          | En cours    | Ajouter des liens vers les pages de gestion dans le BO                        |
 | Masquer les blocs vides dans le front                   | À faire     | Éviter les affichages moches si un champ n’est pas rempli                     |
+
+Comment donner plus de pouvoir de création à notre client....

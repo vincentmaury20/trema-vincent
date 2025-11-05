@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class PageCrudController extends AbstractCrudController
 {
@@ -33,12 +34,14 @@ class PageCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title', 'Titre'),
             TextField::new('subtitle', 'Sous-titre'),
+            TextField::new('slug', 'Slug'),
             TextEditorField::new('content', 'Contenu'),
             ImageField::new('image', 'Image')
                 ->setUploadDir('public/uploads/images')
                 ->setBasePath('uploads/images')
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
                 ->setRequired(false),
+            BooleanField::new('Published', 'Publié'),
         ];
     }
 }

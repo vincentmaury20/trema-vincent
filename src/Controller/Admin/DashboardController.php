@@ -23,6 +23,7 @@ class DashboardController extends AbstractDashboardController
         $url = $adminUrlGenerator->setController(PageCrudController::class)->generateUrl();
 
         return $this->redirect($url);
+        // l'url par défaut est /admin 
     }
 
 

@@ -1,4 +1,4 @@
 easyadmin:
     resource: .
     type: easyadmin.routes
-# ce fichier sert simplement à actriver les routes Admin automatiquement du CRUD, dashboard etc
+# ce fichier sert simplement à activer les routes Admin automatiquement du CRUD, dashboard etc
