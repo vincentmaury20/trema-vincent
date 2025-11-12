@@ -3,63 +3,151 @@
 {% block title %}Liste des formations{% endblock %}
 
 {% block body %}
+<div class="formation-layout">
+  <section class="formation-left-part">
+    <h2 class="left-part-title">Me contacter</h2>
+    <div class="left-part-image">
+      <img src="{{ asset('images/photo.avif') }}" alt="Photo de Catia Tuccinardi Gouyette" class="left-part-image" />
+    </div>
+    <h3 class="left-part-subtitle">Catia Tuccinardi Gouyette</h3>
+    <p>Vous vous posez des questions ? Soyons pragmatiques, je vous répondrai simplement.</p>
+    <ul>
+      <li><i class="bi bi-phone-fill"> </i> 06 86 62 98 14</li>
+      <li><i class="bi bi-envelope-fill"> </i> contact@trema-coach.com</li>
+      <li><i class="bi bi-geo-alt-fill"> </i> 97 bis rue Jouffroy d'Abbans 75017 PARIS</li>
+    </ul>
+  </section>
 
-<div class="formations-wrapper">
-    <h1>Liste des formations</h1>
-    
-
-
-    {% if formations is empty %}
+  <div class="formation-right-part">
+    <h2 class="formation-list-title">Liste des formations</h2>
+    <div class="formations-wrapper">
+      {% if formations is empty %}
         <div class="empty-message">
-            <p>Aucune formation n'est disponible pour le moment.</p>
+          <p>Aucune formation n'est disponible pour le moment.</p>
         </div>
-    {% else %}
+      {% else %}
         {% for formation in formations %}
-            {% if formation.isPublished %}
-                <article class="formation-card" onclick= "location.href= '/formation/{{ formation.id }}'"> 
-                    <h2 class="formation-title">{{ formation.title }}</h2>
-                    <div class="formation-content">
-                        {{ formation.content }}
-                    </div>
-
-                </article>
-            {% endif %}
+          {% if formation.isPublished %}
+            <article class="formation-card" onclick="location.href= '/formation/{{ formation.id }}'">
+              <h2 class="formation-title">{{ formation.title }}</h2>
+              <div class="formation-content">
+                {{ formation.content }}
+              </div>
+            </article>
+          {% endif %}
         {% endfor %}
-    {% endif %}
+      {% endif %}
+    </div>
+  </div>
 </div>
-
+{block stylesheets %}
 <style>
-    .formations-wrapper { margin: 2em auto; max-width: 1000px; width: 95%; }
-    .formation-card { 
-        background: white; 
-        padding: 1.5em; 
-        margin-bottom: 1.5em; 
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .formation-card:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.40);
-        cursor: pointer;
-        background-color: #cabcbcff;
-        transition: background-color 0.3s ease-in-out;
-    }
-    .formation-title { 
-        color: #333; 
-        font-size: 1.5em; 
-        margin-bottom: 0.5em;
-    }
-    .formation-content { 
-        color: #666; 
-        line-height: 1.6;
-    }
-    .actions {
-        margin-top: 1em;
-    }
-    .empty-message {
-        text-align: center;
-        color: #666;
-        padding: 2em;
-    }
-</style>
+{{parent()}}
 
+  .formation-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1em;
+  }
+
+  .formation-left-part {
+    position: sticky;
+    top: 20px;
+    width: 280px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    height: fit-content;
+  }
+
+  .formation-right-part {
+    flex: 1;
+  }
+
+  .left-part-title,
+  .left-part-subtitle {
+    margin-left: 1rem;
+  }
+
+  .left-part-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1em;
+  }
+
+  .formation-list-title {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: #333;
+  }
+
+  .formations-wrapper {
+    margin: 2em auto;
+    max-width: 1000px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3em;
+  }
+
+  .formation-card {
+    background: white;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .formation-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    cursor: pointer;
+    background-color: #cabcbcff;
+  }
+
+  .formation-title {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .formation-content {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #666;
+    padding: 2em;
+  }
+
+  @media (max-width: 768px) {
+    .formations-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .formation-layout {
+      flex-direction: column;
+    }
+
+    .formation-left-part {
+      position: static;
+      width: 100%;
+      margin-bottom: 2em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .formations-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 {% endblock %}

@@ -535,10 +535,25 @@ $form->handleRequest($request);
 | Afficher le lien vers le BO dans le header              | 👍☑️✅      | Ajouter conditionnel dans `header.html.twig` avec `is_granted('ROLE_ADMIN')`  |
 | Créer un menu dans lequel il y a tous les liens         | 👍☑️✅      | Ajouter un bouton dropdown avec tous les liens qui s'affichent dedans         |
 | Ajout du champ `slug` dans `Formation` (optionnel)      | À envisager | Permettre des URLs propres + routing dynamique                                |
-| Ajouter des validations dans les entités                | À faire     | Contraintes Symfony (`NotBlank`, `Length`, etc.)                              |
+| Ajouter des validations dans les entités                | 👍☑️✅      | Contraintes Symfony (`NotBlank`, `Length`, etc.)                              |
 | Créer les vues Twig                                     | À faire     | Templates pour chaque entité et chaque page                                   |
 | Nettoyer le projet                                      | À faire     | Supprimer les fichiers inutiles + faire une review du code                    |
-| Créer un dashboard admin clair                          | En cours    | Ajouter des liens vers les pages de gestion dans le BO                        |
-| Masquer les blocs vides dans le front                   | À faire     | Éviter les affichages moches si un champ n’est pas rempli                     |
+| Créer un dashboard admin clair                          | 👍☑️✅      | Ajouter des liens vers les pages de gestion dans le BO                        |
 
 Comment donner plus de pouvoir de création à notre client....
+
+# Reprise du projet , 12/11/2025
+
+## D'abord une bonne review du code pour se remettre un peu dedans car cela fait une semaine que je n'ai pas mis le nez dans ce projet....
+
+Il me fallait du temps pour pouvoir faire le Dossier pro.
+
+Après une brève code review, petite liste de ce qu'il me manque pour pouvoir faire le projet jusqu'au bout, ce serait chouette :
+
+1. Le lien "Mes outils" ne mène vers rien actuellement
+
+2. Il en est de même pour le lien "Certifications"
+
+3. Voir comment faire pour que les pages crées par l'admin, puissent être exploitable directement dans l'URL car pour le moment, il définit le slug seul et doit mettre en place dans un twig l'affichage.... moyen, très moyen.
+
+4. La gestion des Testimonies c'est cool quand même...

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ContactType extends AbstractType
 {
@@ -26,17 +27,40 @@ class ContactType extends AbstractType
       // - TextType::class : type de champ (input type="text")
       // - 'empty_data' => '' : valeur par défaut si l'utilisateur n'envoie rien (évite null)
       $builder
-         ->add('name', TextType::class, [
-            'empty_data' => ''
+
+         ->add('gender', ChoiceType::class, [
+            'label' => 'Civilité',
+            'choices' => [
+               'Homme' => 'Homme',
+               'Femme' => 'Femme',
+               'Autre' => 'Autre',
+            ],
+            'expanded' => false,
+            'multiple' => false,
+            'required' => true,
          ])
 
+         ->add('firstName', TextType::class, [
+            'label' => 'Prénom',
+            'empty_data' => ''
+         ])
+         ->add('lastName', TextType::class, [
+            'label' => 'Nom',
+            'empty_data' => ''
+         ])
+         ->add('phone', TextType::class, [
+            'label' => 'Numéro de téléphone',
+            'empty_data' => ''
+         ])
          // Champ pour l'email, avec le type EmailType qui ajoute une validation basique côté formulaire
          ->add('email', EmailType::class, [
+            'label' => 'Adresse email',
             'empty_data' => ''
          ])
 
          // Champ textarea pour le message
          ->add('message', TextareaType::class, [
+            'label' => 'Message',
             'empty_data' => ''
          ]);
    }

@@ -1,17 +1,31 @@
 <?php
 
-namespace App\DTO; // DTO = Data Transfer Object
+namespace App\DTO;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactDTO
 {
    /**
+    * Civilité (sexe)
+    */
+   #[Assert\NotBlank(message: "La civilité est obligatoire.")]
+   #[Assert\Choice(choices: ["Homme", "Femme", "Autre"], message: "La civilité doit être 'Homme', 'Femme' ou 'Autre'.")]
+   private ?string $gender = null;
+
+   /**
+    * Prénom de l'expéditeur
+    */
+   #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
+   #[Assert\Length(min: 2, max: 100, minMessage: "Le prénom doit contenir au moins {{ limit }} caractères.")]
+   private ?string $lastName = null;
+
+   /**
     * Nom de l'expéditeur
     */
    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
    #[Assert\Length(min: 2, max: 100, minMessage: "Le nom doit contenir au moins {{ limit }} caractères.")]
-   private ?string $name = null;
+   private ?string $firstName = null;
 
    /**
     * Adresse email de l'expéditeur
@@ -21,6 +35,13 @@ class ContactDTO
    private ?string $email = null;
 
    /**
+    * Numéro de téléphone
+    */
+   #[Assert\NotBlank(message: "Le numéro de téléphone est obligatoire.")]
+   #[Assert\Regex(pattern: "/^\+?[0-9\s\-]{7,20}$/", message: "Le numéro de téléphone n'est pas valide.")]
+   private ?string $phone = null;
+
+   /**
     * Contenu du message
     */
    #[Assert\NotBlank(message: "Le message ne peut pas être vide.")]
@@ -28,13 +49,33 @@ class ContactDTO
    private ?string $message = null;
 
    // Getters / Setters
-   public function getName(): ?string
+   public function getGender(): ?string
    {
-      return $this->name;
+      return $this->gender;
    }
-   public function setName(?string $name): static
+   public function setGender(?string $gender): static
    {
-      $this->name = $name;
+      $this->gender = $gender;
+      return $this;
+   }
+
+   public function getLastName(): ?string
+   {
+      return $this->lastName;
+   }
+   public function setLastName(?string $lastName): static
+   {
+      $this->lastName = $lastName;
+      return $this;
+   }
+
+   public function getFirstName(): ?string
+   {
+      return $this->firstName;
+   }
+   public function setFirstName(?string $firstName): static
+   {
+      $this->firstName = $firstName;
       return $this;
    }
 
@@ -45,6 +86,16 @@ class ContactDTO
    public function setEmail(?string $email): static
    {
       $this->email = $email;
+      return $this;
+   }
+
+   public function getPhone(): ?string
+   {
+      return $this->phone;
+   }
+   public function setPhone(?string $phone): static
+   {
+      $this->phone = $phone;
       return $this;
    }
 
