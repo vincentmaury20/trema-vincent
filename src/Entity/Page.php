@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\PageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\String\Slugger\AsciiSlugger;
+
 
 #[ORM\Entity(repositoryClass: PageRepository::class)]
 class Page
@@ -24,14 +24,14 @@ class Page
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;   // le slug de la page
 
-    #[ORM\Column(length: 2000)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null; // le contenu de la page
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $image = null; // l'image de la page
 
     #[ORM\Column(type: 'boolean')]
-    private bool $Published = false;
+    private bool $published = false;
 
 
     public function getId(): ?int
@@ -99,11 +99,11 @@ class Page
     }
     public function isPublished(): bool
     {
-        return $this->Published;
+        return $this->published;
     }
-    public function setPublished(bool $Published): static
+    public function setPublished(bool $published): static
     {
-        $this->Published = $Published;
+        $this->published = $published;
         return $this;
     }
 }

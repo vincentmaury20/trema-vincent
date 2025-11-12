@@ -10,6 +10,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class PageCrudController extends AbstractCrudController
 {
@@ -34,7 +37,9 @@ class PageCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title', 'Titre'),
             TextField::new('subtitle', 'Sous-titre'),
-            TextField::new('slug', 'Slug'),
+            TextField::new('slug', 'Slug')
+                ->setRequired(false)
+                ->setHelp('Laissez vide pour générer automatiquement à partir du titre'),
             TextEditorField::new('content', 'Contenu'),
             ImageField::new('image', 'Image')
                 ->setUploadDir('public/uploads/images')
@@ -43,5 +48,15 @@ class PageCrudController extends AbstractCrudController
                 ->setRequired(false),
             BooleanField::new('published', 'Publié'),
         ];
+    }
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof Page && !$entityInstance->getSlug()) {
+            $slugger = new AsciiSlugger();
+            $slug = $slugger->slug($entityInstance->getTitle())->lower();
+            $entityInstance->setSlug($slug);
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
     }
 }

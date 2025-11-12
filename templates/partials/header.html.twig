@@ -1,28 +1,40 @@
-<header class="site-header">
-   <div class="container">
-      <div class="row align-items-center">
-         <div class="col">
-            <h1 onclick="location.href='{{ path('app_home') }}'" class="brand" >Tréma<i class="bi bi-circle-fill"></i><i class="bi bi-circle-fill"></i></h1>
-            <h2 class="lead">Coaching professionnel</h2>
-         </div>
-         <div class="col text-end">
-            <div class="btn-group">
-              <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                Menu
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="{{ path('app_formation') }}">Formations</a></li>
-                <li><a class="dropdown-item" href="{{ path('app_contact') }}">Contact</a></li>
-                <li><a class="dropdown-item" href="{{ path('app_testimony') }}">Témoignages</a></li>
-                <li><a class="dropdown-item" href="{{ path('app_testimony_new') }}">Déposer un témoignage</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                <li><a class="dropdown-item" href="{{ path('admin') }}">Admin</a></li>
-                {% endif %}
-              </ul>
-            </div>
-         </div>
+<header class="site-header bg-light border-bottom py-3">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="brand mb-0" onclick="location.href='{{ path('app_home') }}'" style="cursor:pointer;">
+          Tréma <i class="bi bi-circle-fill text-info"></i><i class="bi bi-circle-fill text-info"></i>
+        </h1>
+        <h2 class="lead text-muted">Coaching professionnel</h2>
       </div>
-   </div>
-</header>
 
-{# je voudrais faire un menu qui défile pour les différents liens pour que l'esthétique soit à peu près au rendez-vous #}
+      <div class="col text-end">
+        <div class="dropdown">
+          <button class="btn btn-info dropdown-toggle px-4" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="menuDropdown" style="min-width: 220px;">
+            <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_formation' %}active{% endif %}" href="{{ path('app_formation') }}">Formations</a></li>
+            <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" href="{{ path('app_contact') }}">Contact</a></li>
+            <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_testimony' %}active{% endif %}" href="{{ path('app_testimony') }}">Témoignages</a></li>
+            <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_testimony_new' %}active{% endif %}" href="{{ path('app_testimony_new') }}">Déposer un témoignage</a></li>
+
+            {% for page in menu_pages() %}
+              <li>
+                <a class="dropdown-item {% if app.request.get('slug') == page.slug %}active{% endif %}"
+                   href="{{ path('app_page_show', { slug: page.slug }) }}">
+                  {{ page.title }}
+                </a>
+              </li>
+            {% endfor %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ path('admin') }}">Admin</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -18,11 +18,12 @@ final class PageController extends AbstractController
    #[Route('/', name: 'app_home')]
    public function index(EntityManagerInterface $em): Response
    {
-      $page = $em->getRepository(Page::class)->findAll();
+      $pages = $em->getRepository(Page::class)->findBy(['published' => true]);
+
 
       return $this->render('page/home.html.twig', [
          'controller_name' => 'PageController',
-         'page' => $page,
+         'pages' => $pages,
       ]);
    }
    // voir une page par rapport à son slug
@@ -30,7 +31,12 @@ final class PageController extends AbstractController
    #[Route('/page/{slug}', name: 'app_page_show')]
    public function showBySlug(string $slug, EntityManagerInterface $em): Response
    {
+      if (in_array($slug, ['contact', 'login', 'admin'])) {
+         throw $this->createNotFoundException();
+      }
+
       $page = $em->getRepository(Page::class)->findOneBy(['slug' => $slug, 'published' => true]);
+
       if (!$page) {
          throw $this->createNotFoundException('La page demandée n\'existe pas.');
       }
