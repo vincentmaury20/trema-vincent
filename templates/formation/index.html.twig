@@ -40,10 +40,11 @@
     </div>
   </div>
 </div>
-{block stylesheets %}
-<style>
-{{parent()}}
+{% endblock %}
 
+{% block stylesheets %}
+{{parent()}}
+<style>
   .formation-layout {
     display: flex;
     gap: 40px;
@@ -55,10 +56,11 @@
 
   .formation-left-part {
     position: sticky;
-    top: 20px;
-    width: 280px;
-    background-color: #ffffff;
-    padding: 20px;
+    top: 0;
+    width: 20rem;
+    background-color: #515858ff;
+    color: white;
+    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     height: fit-content;
@@ -92,22 +94,23 @@
     max-width: 1000px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 3em;
   }
 
   .formation-card {
     background: white;
     padding: 1.5em;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 10px #4bb9cfff solid;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
+}
 
   .formation-card:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     cursor: pointer;
-    background-color: #cabcbcff;
+    background-color: #f1f1f1ff;
   }
 
   .formation-title {
@@ -150,4 +153,5 @@
     }
   }
 </style>
+
 {% endblock %}

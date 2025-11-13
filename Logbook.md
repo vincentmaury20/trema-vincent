@@ -354,7 +354,6 @@ trema=> SELECT * FROM "user";
 
     -   TestimonyType.php☑️
     -   FormationType.php☑️ dans le controller, gérer le fait que ce soit juste l'admin qui puisse le faire
-    -   SocialLinkType.php☑️
     -   ...
 
 -   Compléter les controllers
@@ -377,7 +376,7 @@ trema=> SELECT * FROM "user";
 
 ## Structure du projet
 
-Voici une description en français du rôle des principaux dossiers et fichiers du projet :
+Voici une description du rôle des principaux dossiers et fichiers du projet :
 
 -   `composer.json` : configuration des dépendances PHP (Composer) et autoload.
 -   `compose.yaml` / `compose.override.yaml` : fichiers Docker Compose pour lancer les services (base de données, serveur, etc.).
@@ -403,157 +402,56 @@ Voici une description en français du rôle des principaux dossiers et fichiers 
 
 Pour l'expérience user il faudrait que je fasse un dashboard qui afficherait des liens vers les pages de création de pages, formations, gestion des social medias etc.
 
-# Dimanche 26/10
+# 🚀 Suivi de projet — Tréma
 
-Je commence par mettre en place ce dashboard dont Lauréanne m'a parlé,
+## ✅ Ce qui est déjà en place
 
-Pour "terminer" le projet il me faut :
-
-1. Trouver la solution au problème de l'affichage du logo différent sur certaines pages✅
-2. Gérer les témoignages de manière 'joli'✅
-3. Faire une page contact avec formulaire✅
-4. Gestion des erreurs avec symfony
-5. Mettre des logos cliquables d'insta et linkedin ✅
-6. La page des formations est gérée en css pur mais voir si bootstrapper✅
-7. Faire une review du code entier✅
-8. Nettoyer en enlevant les fichiers et dossiers dont je n'ai plus besoin
-9. Regarder si, des animations pas trop lourdes (révisions...) sont possiblement exploitables, ou si j'ai envie✅
-10. Ajouter un text cliquable au moment du hover sur les images de la page d'accueil✅
-
-aller voir sur le site des animations css que j'ai mis dans PHP apprentissage
-
-**J'ai dû réinstaller composer car il ne retrouvait pas mon bin/console....**
-
-J'ai dû le réinstaller à la main
-
-# Vendredi 31/10
-
-# Implémentation d’un formulaire de contact avec envoi d’email (Symfony)
-
-## Vue d’ensemble — composants à mettre en place
-
--   **Transporteur mail** : configuration `MAILER_DSN` pour dev / prod / test
--   **FormType** : `ContactType` décrivant les champs du formulaire
--   **DTO** : `ContactDTO` contenant les données + contraintes de validation
--   **Controller** : `ContactController` pour créer le formulaire, valider, envoyer le mail
--   **Templates Twig** :
-    -   `index.html.twig` pour le formulaire
-    -   `contact.html.twig` pour le contenu du mail
-
-## Configuration des environnements
-
-### `.env` (développement par défaut)
-
-```env
-MAILER_DSN=smtp://USER:PASS@smtp.example.com:587
-```
-
-### `.env.local` (override local)
-
--   Contient les identifiants SMTP réels (non versionnés)
--   Exemple avec Mailpit (sans Docker) :
-
-```powershell
-cd chemin/vers/le/projet
-./mailpit
-```
-
-```env
-MAILER_DSN=smtp://localhost:1025
-```
-
--   Interface Mailpit : http://127.0.0.1:8025
-
-### `.env.test` (environnement de test)
-
-```env
-MAILER_DSN=null://null
-```
-
-## Implémentation — fichiers principaux
-
-### `ContactDTO.php`
-
--   Propriétés privées : `name`, `email`, `message`
--   Contraintes `#[Assert\NotBlank]`, `#[Assert\Email]`, etc.
--   Getters & setters utilisés par Symfony via `handleRequest`
-
-### `ContactType.php`
-
--   Champs : `name`, `email`, `message`
--   Options : `empty_data`, labels, etc.
-
-### `ContactController.php`
-
--   Création du DTO
--   Création du formulaire :
-
-```php
-$form = $this->createForm(ContactType::class, $dto);
-$form->handleRequest($request);
-```
-
--   Si valide :
-    -   Création d’un `TemplatedEmail`
-    -   Envoi via `$mailer->send($email)`
-    -   Flash message + redirection
-
-### Templates Twig
-
--   `index.html.twig` : affichage du formulaire
--   `contact.html.twig` : contenu HTML de l’email
+-   Création des entités principales : `Formation`, `Page`, `Testimony`, `User`
+-   Mise en place des CRUD avec EasyAdmin
+-   Sécurisation du back-office avec authentification (`LoginFormAuthenticator`)
+-   Formulaire de contact fonctionnel avec envoi d’email via `ContactDTO`, `ContactType`, `Mailer`
+-   Gestion des témoignages avec affichage conditionnel (`isPublished`)
+-   Soumission de témoignages par les visiteurs
+-   Intégration des logos cliquables (Instagram, LinkedIn)
+-   Page d’accueil avec effets de hover + texte cliquable
+-   Page contact avec formulaire
+-   Résolution du bug d’affichage du logo
+-   Menu de navigation avec dropdown complet
+-   Dashboard admin clair et fonctionnel
+-   Review complète du code + ajout de commentaires
+-   Animations CSS légères intégrées
+-   Refonte CSS/Bootstrap en cours sur la page des formations
 
 ---
 
-## Pourquoi le "mapping" fonctionne
+## 📋 Tâches restantes et finalisation
 
--   Symfony lie les champs du formulaire aux propriétés du DTO
--   Lors du `handleRequest`, Symfony appelle les setters (`setName`, etc.)
--   Après soumission, `$form->getData()` retourne l’objet DTO rempli
+| Tâche                                                         | Statut      | Action à faire                                                          |
+| ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------- |
+| Créer les vues Twig pour les entités et pages dynamiques      | ✅          | Templates Twig finalisés                                                |
+| Nettoyer le projet                                            | ✅          | Suppression des fichiers inutiles + review finale                       |
+| Ajouter un lien fonctionnel vers "Mes outils"                 | ✅          | Créer la page ou rediriger vers une section existante                   |
+| Ajouter un lien fonctionnel vers "Certifications"             | ✅          | Idem que ci-dessus                                                      |
+| Rendre les pages créées par l’admin accessibles via leur slug | ✅          | Routing dynamique + contrôleur générique + affichage Twig               |
+| Ajouter le champ `slug` dans `Formation` (optionnel)          | ✅          | Pour URLs propres si besoin                                             |
+| Finaliser le style avec ou sans Bootstrap                     | 🛠️ En cours | Harmoniser les pages, responsive, animations légères                    |
+| Donner plus de pouvoir de création au client                  | 🧠 À penser | Peut-être via un éditeur WYSIWYG ou des blocs dynamiques dans EasyAdmin |
 
 ---
 
-# Suivi de mon avancement — Projet Tréma
+## 🧩 Notes techniques et réflexions
 
-## Ce que j’ai déjà mis en place
+-   Le formulaire de contact est bien encapsulé avec DTO + validation
+-   Le mapping Symfony fonctionne parfaitement grâce à `handleRequest()` et `getData()`
+-   Mailpit est bien configuré pour le dev local
+-   Le projet est bien structuré : migrations, arborescence, sécurité
+-   Les témoignages sont bien gérés côté admin et front
+-   Le code est propre (bien sûr basique...), commenté partiellement pour les code reviews , pourrait être tout à fait utilisé pour compléter mon Dossier Pro par exemple
 
--   J’ai créé les entités principales : `Formation`, `Page`, `Testimony`, `User`
--   J’ai mis en place les CRUD EasyAdmin pour toutes ces entités
--   J’ai sécurisé l’accès au back-office avec un login fonctionnel (`LoginFormAuthenticator`)
--   J’ai structuré le formulaire de témoignage (`TestimonyType`)
--   J’ai une route d’affichage des témoignages côté front (`/testimony`)
--   J’ai configuré l’envoi d’email via le formulaire de contact avec DTO, FormType et Mailer
--   J’ai structuré le projet proprement (BDD, migrations, arborescence, etc.)
+---
 
-## Ce qu’il me reste à faire
+## 🌟 Prochaine étape
 
-| Tâche                                                   | Statut      | Action à faire                                                                |
-| ------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------- |
-| Soumission de témoignage par les visiteurs              | 👍☑️✅      | Ajouter la méthode `new()` + créer le template `new.html.twig`                |
-| Filtrer les témoignages affichés (`isPublished = true`) | 👍☑️✅      | Modifier `index()` dans `TestimonyController` pour n’afficher que les validés |
-| Ajouter le champ `isPublished` dans `Testimony`         | 👍☑️✅      | Modifier l’entité + afficher dans EasyAdmin                                   |
-| Afficher le lien vers le BO dans le header              | 👍☑️✅      | Ajouter conditionnel dans `header.html.twig` avec `is_granted('ROLE_ADMIN')`  |
-| Créer un menu dans lequel il y a tous les liens         | 👍☑️✅      | Ajouter un bouton dropdown avec tous les liens qui s'affichent dedans         |
-| Ajout du champ `slug` dans `Formation` (optionnel)      | À envisager | Permettre des URLs propres + routing dynamique                                |
-| Ajouter des validations dans les entités                | 👍☑️✅      | Contraintes Symfony (`NotBlank`, `Length`, etc.)                              |
-| Créer les vues Twig                                     | À faire     | Templates pour chaque entité et chaque page                                   |
-| Nettoyer le projet                                      | À faire     | Supprimer les fichiers inutiles + faire une review du code                    |
-| Créer un dashboard admin clair                          | 👍☑️✅      | Ajouter des liens vers les pages de gestion dans le BO                        |
-
-Comment donner plus de pouvoir de création à notre client....
-
-# Reprise du projet , 12/11/2025
-
-## D'abord une bonne review du code pour se remettre un peu dedans car cela fait une semaine que je n'ai pas mis le nez dans ce projet....
-
-Il me fallait du temps pour pouvoir faire le Dossier pro.
-
-Après une brève code review, petite liste de ce qu'il me manque pour pouvoir faire le projet jusqu'au bout, ce serait chouette :
-
-1. Le lien "Mes outils" ne mène vers rien actuellement
-
-2. Il en est de même pour le lien "Certifications"
-
-3. Voir comment faire pour que les pages crées par l'admin, puissent être exploitable directement dans l'URL car pour le moment, il définit le slug seul et doit mettre en place dans un twig l'affichage.... moyen, très moyen.
-
-4. La gestion des Testimonies c'est cool quand même...
+🎨 **Focus sur le style** : harmonisation visuelle, responsive design, animations douces, et pourquoi pas un thème clair/sombre.
+😵 **Gestion des erreurs** : Gérer les pages erreur
+🦾 **Encore plus de pouvoir pour le client** : Pouvoir inclure une image supplémentaire par exemple, une section etc ....

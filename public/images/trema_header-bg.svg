@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f7ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e3f2fd;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#64b5f6;stop-opacity:0.15" />
+      <stop offset="50%" style="stop-color:#42a5f5;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#64b5f6;stop-opacity:0.15" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Subtle geometric patterns -->
+  <circle cx="150" cy="80" r="120" fill="url(#accentGradient)" opacity="0.3"/>
+  <circle cx="1050" cy="220" r="100" fill="url(#accentGradient)" opacity="0.3"/>
+  
+  <!-- Clean lines -->
+  <path d="M 0 150 Q 300 120, 600 150 T 1200 150" 
+        stroke="#42a5f5" 
+        stroke-width="2" 
+        fill="none" 
+        opacity="0.25"/>
+  
+  <path d="M 0 180 Q 300 160, 600 180 T 1200 180" 
+        stroke="#64b5f6" 
+        stroke-width="1.5" 
+        fill="none" 
+        opacity="0.2"/>
+  
+  <!-- Minimalist dots pattern -->
+  <circle cx="400" cy="100" r="3" fill="#42a5f5" opacity="0.35"/>
+  <circle cx="450" cy="120" r="2" fill="#64b5f6" opacity="0.35"/>
+  <circle cx="800" cy="140" r="3" fill="#42a5f5" opacity="0.35"/>
+  <circle cx="850" cy="160" r="2" fill="#64b5f6" opacity="0.35"/>
+  <circle cx="500" cy="200" r="2" fill="#42a5f5" opacity="0.25"/>
+  <circle cx="900" cy="80" r="2" fill="#64b5f6" opacity="0.25"/>
+</svg>

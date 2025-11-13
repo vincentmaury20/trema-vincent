@@ -1,7 +1,8 @@
-<header class="site-header bg-light border-bottom py-3">
+<header class="site-header border-bottom py-3"
+        style="background-image: url('{{ asset('images/background-pro.png') }}'); background-size: cover; background-position: center;">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col">
+      <div class="col title-header">
         <h1 class="brand mb-0" onclick="location.href='{{ path('app_home') }}'" style="cursor:pointer;">
           Tréma <i class="bi bi-circle-fill text-info"></i><i class="bi bi-circle-fill text-info"></i>
         </h1>
@@ -10,12 +11,12 @@
 
       <div class="col text-end">
         <div class="dropdown">
-          <button class="btn btn-info dropdown-toggle px-4" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <button type="button" class=" btn btn-outline-primary " onclick="location.href='{{ path('app_formation') }}'">Formations</button>
+          <button type="button" class=" btn btn-outline-primary " onclick="location.href='{{ path('app_contact') }}'">Contact</button>
+          <button type="button" class="btn btn-dark dropdown-toggle px-4" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Menu
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="menuDropdown" style="min-width: 220px;">
-            <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_formation' %}active{% endif %}" href="{{ path('app_formation') }}">Formations</a></li>
-            <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_contact' %}active{% endif %}" href="{{ path('app_contact') }}">Contact</a></li>
             <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_testimony' %}active{% endif %}" href="{{ path('app_testimony') }}">Témoignages</a></li>
             <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'app_testimony_new' %}active{% endif %}" href="{{ path('app_testimony_new') }}">Déposer un témoignage</a></li>
 
@@ -38,3 +39,13 @@
     </div>
   </div>
 </header>
+
+{% block stylesheets %}
+<style>
+  .site-header {
+    height: 8rem;
+  }
+
+  
+</style>
+{% endblock %}
