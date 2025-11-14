@@ -2,6 +2,21 @@
 
 
 {% block body %}
+
+  <section class="formation-left-part">
+    <h2 class="left-part-title">Me contacter</h2>
+    <div class="left-part-image">
+      <img src="{{ asset('images/photo.avif') }}" alt="Photo de Catia Tuccinardi Gouyette" class="left-part-image" />
+    </div>
+    <h3 class="left-part-subtitle">Catia Tuccinardi Gouyette</h3>
+    <p>Vous vous posez des questions ? Soyons pragmatiques, je vous répondrai simplement.</p>
+    <ul>
+      <li><i class="bi bi-phone-fill"> </i> 06 86 62 98 14</li>
+      <li><i class="bi bi-envelope-fill"> </i> contact@trema-coach.com</li>
+      <li><i class="bi bi-geo-alt-fill"> </i> 97 bis rue Jouffroy d'Abbans 75017 PARIS</li>
+    </ul>
+  </section>
+
 {%if formation is not empty %}
    <div class="page-container ">
       {% for item in formation %}
@@ -22,3 +37,106 @@
 
 {% endblock %}
 
+{% block stylesheets %}
+{{parent()}}
+<style>
+
+.page-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.formation-item {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+  max-width: 60rem;
+}
+
+.formation-title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.formation-content {
+  font-size: 1rem;
+  color: #555;
+}
+
+.empty-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.formation-left-part {
+  position: sticky;
+  top: 2rem;
+  width: 20rem;
+  background-color: #515858;
+  color: white;
+  margin-left: 5rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.left-part-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.left-part-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.left-part-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.formation-left-part ul {
+  list-style: none;
+  padding: 0;
+}
+
+.formation-left-part li {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.formation-left-part i {
+  margin-right: 0.5rem;
+  color: #3c9cd3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .formation-left-part {
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+</style>
+
+{% endblock %}
