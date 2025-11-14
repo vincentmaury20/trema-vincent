@@ -33,45 +33,80 @@
 {% endblock %}
 
 {% block stylesheets %}
-{{ parent()}} {# attention au placement de parent(), car sinon le style ne sera pas du tout chargé et donc pas appliqué ! #}
+{{ parent() }}
 <style>
+  body {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .testimony-wrapper {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 3em 2em;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    max-width: 1000px;
+    margin: 2rem auto;
+  }
+
+  .testimony-wrapper h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 2rem;
+  }
+
+  .testimony-card {
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    padding: 2em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 6px solid #515858;
+  }
+
+  .testimony-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .testimony-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+  }
+
+  .testimony-content {
+    font-size: 1rem;
+    color: #495057;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .testimony-card .text-muted {
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-align: right;
+  }
+
+  .empty-message {
+    padding: 2em;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+  }
+
+  @media (max-width: 768px) {
     .testimony-wrapper {
-        background-color: #f1f3f5; /* gris très clair */
-        border-radius: 1rem;
-        padding: 2em;
+      padding: 2em 1em;
     }
 
     .testimony-card {
-        background-color: #f8f9fa; /* gris clair Bootstrap */
-        border-radius: 1rem;
-        padding: 1.5em;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        transition: box-shadow 0.3s ease, transform 0.2s ease;
+      padding: 1.5em;
     }
-
-    .testimony-card:hover {
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        transform: translateY(-4px);
-    }
-
-    .testimony-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.75em;
-        color: #343a40;
-    }
-
-    .testimony-content {
-        color: #495057;
-        line-height: 1.6;
-        margin-bottom: 0.5em;
-    }
-
-    .empty-message {
-        padding: 2em;
-        color: #6c757d;
-        background-color: #e9ecef;
-        border-radius: 1rem;
-    }
+  }
 </style>
 {% endblock %}
