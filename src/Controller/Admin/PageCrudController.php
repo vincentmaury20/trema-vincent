@@ -47,7 +47,7 @@ class PageCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
                 ->setRequired(false),
             BooleanField::new('published', 'Publié'),
-        ];
+        ]; // Prévoir une image de base si pas d'image 
     }
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
@@ -60,3 +60,13 @@ class PageCrudController extends AbstractCrudController
         parent::persistEntity($entityManager, $entityInstance);
     }
 }
+
+// Cette méthode raconte :
+// "Si c'est une instance de Page et que le slug n'est pas renseigné,
+// alors on utilise $slugger pour générer automatiquement un slug à partir du titre,
+// en le passant en minuscules pour éviter les conflits.
+// Le slug final sera donc une version normalisée du titre de la page créée."
+// parent::persistEntity(...) appelle la méthode de la classe parente (AbstractCrudController).
+// Elle effectue la persistance réelle : $entityManager->persist() + flush().
+// On l’appelle après avoir injecté notre logique métier personnalisée ,j'en veux pour exemple cette dernière méthode.
+// Cela garantit que l’entité est complète et conforme avant d’être enregistrée en base.

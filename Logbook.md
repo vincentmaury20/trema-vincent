@@ -16,442 +16,96 @@ L’objectif est de créer le BO pour mettre en place toutes les pages maquettes
 
 Tout ce que je vais marquer dans ce brief est pour t’aider, t’aiguiller mais rien n’est imposé. Si tu as de meilleures idées, une meilleure logique, n’hésite pas, on peut en discuter ou tu peux le faire directement. L’idée globalement c’est de rendre dynamique mes maquettes donc la façon de faire après, c’est principalement à toi de dire et de faire, toujours en pensant “client”, il faut que ce soit le plus simple possible pour lui tout en pensant à la maintenance du code de notre côté agence.
 
-### FO “STYLE DES PAGES”
-
-Les indications dans le code ont été mises pour un projet ne partant pas de zéro, c’est à dire qu’on a développé une base, à l’image d’un CMS comme Wordpress, pour nous éviter de développer à chaque fois des choses qui sont récurrentes (pages, menus, etc.). Donc possible que toutes les indications ne soient pas pertinentes, mais surtout demande moi si tu as besoin (Discord de préférence pour gérer en fonction des urgences ^^).
-
 ### BO “ADMINISTRATION”
 
-Définir les Entity et les champs nécessaires (avec leur type, s’ils sont obligatoires, etc.). Possible de faire sur un GoogleSheet ou toute autre ressource de ton choix.
-Faire valider par l’équipe avant de développer.
+# Projet de stage — Tréma (Logbook synthétique)
 
-### ORGANISATION DU PROJET
+Ce document résume l'avancement du projet, les décisions techniques importantes et les prochains axes de travail. Il sert de carnet de bord — garder l'essentiel et les actions à mener.
 
-1. Prise en main du projet, installation en local de symfony, lecture du brief, analyse des maquettes et des commentaires dans le code
+## Objectif
 
-2. Faire un listing de toutes les entités dont on va avoir besoin + les champs présents à l’intérieur -> Nous montrer
+Rendre le site éditable côté back‑office (BO) pour le client tout en conservant une UI propre côté front (FO). Priorité : facilité d'édition + maintenance pour l'agence.
 
-3. Création d’un login sécurisé pour se connecter au BO
+## Avancement résumé
 
-4. Mise en place du BO et du FO (voir avec nous l’ordre à effectuer, on fera peut-être pas toutes les pages)
+-   Entités principales mises en place : `User`, `Page`, `Formation`, `Testimony`.
+-   BO : CRUDs via EasyAdmin, authentification back‑office fonctionnelle (`LoginFormAuthenticator`).
+-   FO : pages d'accueil, contact (formulaire + envoi mail via DTO), soumission de témoignages publique.
+-   Structure du projet : arborescence standard Symfony, migrations en place, tests et assets configurés.
 
-5. Mise en place de la vue contact avec création d’un formulaire fonctionnel
+## Points techniques notables
 
-# Lundi 20/10
+-   Les formulaires utilisent DTO / FormType / contraintes `Assert` pour la validation.
+-   Les migrations Doctrine versionnent le schéma (ex. ajout de `is_published` pour `Testimony`).
+-   Mailpit / MailHog ou équivalent est utilisé en dev pour intercepter les emails.
 
-## Entités du projet Tréma
+## État des tâches (high level)
 
-### User
+-   Vues Twig : majoritairement créées, restent quelques pages à finaliser (responsive & styles).
+-   Sécurité : authentification en place, reste à affiner les permissions selon rôles si besoin.
+-   Formulaires : contact et témoignages fonctionnels (validation et persistance).
+-   Nettoyage : suppression de fichiers inutiles et revue du code en cours.
 
-| Champ     | Type          | Contraintes | Description                       |
-| --------- | ------------- | ----------- | --------------------------------- |
-| ID        | Integer       | Obligatoire | Identifiant unique du user        |
-| name      | VARCHAR (255) | Obligatoire | Nom et prénom du user             |
-| email     | VARCHAR(100)  | Obligatoire | Email du user                     |
-| password  | TEXT          | Obligatoire | Code d'identification à hasher    |
-| role      | VARCHAR(100)  | Obligatoire | Rôle du user                      |
-| createdAt | TIMESTAMP     | Auto-généré | Date de création du compte (auto) |
+## Problèmes rencontrés & résolutions rapides
 
----
+-   Problème d'installation PostgreSQL localement (résolu manuellement puis migrations appliquées).
+-   Bug classique : désynchronisation entité ↔ FormType (ex. champ `name` manquant dans le formulaire `TestimonyType`) — corrigé en ajoutant le champ et en affichant les erreurs de validation.
 
-### Page
+## Checklist technique (rappels)
 
-| Champ   | Type    | Contraintes | Description        |
-| ------- | ------- | ----------- | ------------------ |
-| ID      | Integer | Obligatoire | Identifiant unique |
-| title   | VARCHAR | Obligatoire | Titre de la page   |
-| content | TEXT    | Obligatoire | Contenu HTML       |
+-   Générer/Appliquer migrations : `symfony console make:migration` puis `symfony console doctrine:migrations:migrate`.
+-   Vérifier SQL attendu : `symfony console doctrine:schema:update --dump-sql`.
+-   Lancer serveur local : `symfony server:start`.
 
----
+## Axes d'amélioration (priorisés)
 
-### Formation
+1.  Style & expérience utilisateur (prioritaire)
 
-| Champ   | Type         | Contraintes | Description             |
-| ------- | ------------ | ----------- | ----------------------- |
-| ID      | Integer      | Obligatoire | Identifiant unique      |
-| title   | VARCHAR(100) | Obligatoire | Nom de la formation     |
-| content | TEXT         | Obligatoire | Contenu de la formation |
+    -   Harmoniser la charte (typographie, couleurs, espacements).
+    -   Finaliser la refonte Bootstrap pour `formation` et pages liées.
+    -   Ajouter thème clair/sombre en option.
 
----
+2.  Robustesse des formulaires & anti‑spam
 
-### Category
+    -   Ajouter un honeypot ou reCAPTCHA sur les formulaires publics.
+    -   Mettre en place un throttling pour limiter les envois abusifs.
 
-| Champ | Type         | Contraintes | Description         |
-| ----- | ------------ | ----------- | ------------------- |
-| ID    | Integer      | Obligatoire | Identifiant unique  |
-| title | VARCHAR(100) | Obligatoire | Nom de la catégorie |
+3.  Tests & CI
 
----
+    -   Ajouter tests unitaires pour DTO et contraintes (`Validator`), tests fonctionnels pour les formulaires et l'envoi d'emails.
+    -   Intégrer PHPUnit dans CI/CD et exécuter tests sur chaque PR.
 
-### Testimony
+4.  Administration & UX du BO
 
-| Champ   | Type         | Contraintes | Description            |
-| ------- | ------------ | ----------- | ---------------------- |
-| ID      | Integer      | Obligatoire | Identifiant unique     |
-| title   | VARCHAR(100) | Obligatoire | Nom de la catégorie    |
-| content | TEXT         | Obligatoire | Contenu du commentaire |
+    -   Permettre au client d'insérer des blocs dynamiques (éditeur WYSIWYG ou blocs réutilisables).
+    -   Améliorer le dashboard admin avec accès directs aux actions courantes.
 
----
+5.  Monitoring & déploiement
 
-### SocialMedia
+    -   Ajouter logs structurés et métriques (usage du mailer, erreurs 5xx).
+    -   Préparer `.env` pour staging/prod et documenter la procédure de déploiement.
 
-| Champ | Type         | Contraintes | Description                 |
-| ----- | ------------ | ----------- | --------------------------- |
-| ID    | Integer      | Obligatoire | Identifiant unique          |
-| title | VARCHAR(100) | Obligatoire | Nom de la catégorie         |
-| link  | VARCHAR(100) | Obligatoire | Liens vers le réseau social |
+6.  SEO & URLs
+    -   Ajouter champ `slug` aux entités pertinentes et générer des URLs propres.
+    -   Ajouter métadonnées et sitemap si besoin.
 
-### Les associations
+## Prochaines actions recommandées (court terme)
 
-Il faut absolument que je reprenne les associations dans le MOCODO, il faut que je travaille là-dessus.
+-   Finaliser les styles des pages critiques (home, formation, contact).
+-   Écrire 2 tests unitaires (DTO contact + DTO testimony) et 1 test fonctionnel (soumission contact).
 
----
+## Ça mérite un peu d'explication ...
 
-Voilà où j'en suis pour le moment
+Avec mes mots, l'entité page nous sert bien sûr de base pour toutes les données à récolter et il en découle pas mal de méthodes dans chaque controlleurs crud ou non, des service et d'extensions twig ....
+Tableau explicatif ici:
 
-USER: Code_User, name, email, password, role
-ACCESS TO, 0N [admin]FORMATION, 0N PAGE, 0N CATEGORY, 0N
+| Fichier                     | Rôle principal                           | Responsabilité clé                                                                     |
+| --------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Page.php` (Entité)         | Structure des données                    | Définit les propriétés (title, slug, content...) et les getters/setters                |
+| `PageCrudController.php`    | Gestion admin des pages via EasyAdmin    | Gère les formulaires, surcharge `persistEntity()` pour générer un slug automatiquement |
+| `PageMenuService.php`       | Service métier pour les pages publiées   | Fournit `getPublishedPages()` pour centraliser la logique de récupération              |
+| `PageMenuExtension.php`     | Extension Twig personnalisée             | Expose `menu_pages()` dans les templates Twig pour afficher les pages publiées         |
+| `show.html.twig` (Template) | Affichage public d’une page via son slug | Utilise la variable `page` pour afficher dynamiquement le contenu de la page           |
 
-PAGE: Code_Page, title, content
-
-FORMATION: Code_Page, title, content
-
-CATEGORY:Code_Category,title
-
-COMMENTARY:Code_Commentary,title, content
-
-CONTACT:Code_Contact,title , email
-
-SOCIAL_MEDIA:Code_Social_Media, title, link
-
----
-
-#### Questions en fin de journée
-
-Mes tables sont-elles justifiées?
-Twig fonctionne comme ejs ?
-Les prochaines étapes ce sera donc de faire les fichiers pour les vues...
-Mettre en place une base de données avec postgresl je pense
-
----
-
-### Mocodo pour le MCD
-
-[Le lien vers la dernière version](https://www.mocodo.net/?mcd=eNp10EELwiAUB_D7-xTe3aGu3WRZCM3FZkREPCwNpM3FZvT128aSXXb78_zxfyrQI9vzDXEGgwuVxe5z78OQHo0P1gegipdKZLm8jMzoYCf7FwC0zFPBDpjxrWCztsr5F6QFZ4rjsCgha0mu7km0qZ2_kVPJi4SsJBkO4VyI3sV1I44ijgEyJnuO852LxXMEdBiP1_O6tmhr7Sp86677Nq3Btqks9E7hLi8ypkQuF2ujABrj7N3Tz_wAFgxsdw==)
-
-**Generated by Mocodo 4.3.2**
-
-```sql
--- Utilisateurs
-CREATE TABLE user (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-  role VARCHAR(50) DEFAULT 'ROLE_USER'
-);
-
--- Formations
-CREATE TABLE formation (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(100) NOT NULL,
-  content TEXT
-);
-
-
--- Pages
-CREATE TABLE page (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(150) NOT NULL,
-  subtitle VARCHAR(255),
-  content TEXT,
-  image TEXT
-);
-
--- Témoignages
-CREATE TABLE testimony (
-  id SERIAL PRIMARY KEY,
-  date DATE,
-  title VARCHAR(100) NOT NULL,
-  content TEXT
-);
-
--- Réseaux sociaux (admin gestion des réseaux sociaux )
-CREATE TABLE social_link (
-  id SERIAL PRIMARY KEY,
-  title VARCHAR(100) NOT NULL,
-  link VARCHAR(255) NOT NULL
-);
-
-
--- Création de page par utilisateur (admin)
-CREATE TABLE create_page (
-  id SERIAL PRIMARY KEY,
-  user_id INT NOT NULL,
-  page_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (page_id) REFERENCES page(id)
-);
-
--- Édition de formation par utilisateur (admin)
-CREATE TABLE edit_formation (
-  id SERIAL PRIMARY KEY,
-  user_id INT NOT NULL,
-  formation_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (formation_id) REFERENCES formation(id)
-);
-
--- Gestion des réseaux sociaux par utilisateur (admin)
-CREATE TABLE manage_social_media (
-  id SERIAL PRIMARY KEY,
-  user_id INT NOT NULL,
-  social_media_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (social_media_id) REFERENCES social_media(id)
-);
-
-
-CREATE TABLE send_message (
-  id SERIAL PRIMARY KEY,
-  user_id INT NOT NULL,
-  contact_message_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (contact_message_id) REFERENCES contact_message(id)
-);
-
-
-CREATE TABLE write_testimony (
-  id SERIAL PRIMARY KEY,
-  user_id INT NOT NULL,
-  testimony_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id),
-  FOREIGN KEY (testimony_id) REFERENCES testimony(id)
-);
-
-ALTER TABLE category
-ADD FOREIGN KEY (formation_id) REFERENCES formation(id);
-
-
-ALTER TABLE create_page
-ADD FOREIGN KEY (user_id) REFERENCES user(id),
-ADD FOREIGN KEY (page_id) REFERENCES page(id);
-
-
-ALTER TABLE edit_formation
-ADD FOREIGN KEY (user_id) REFERENCES user(id),
-ADD FOREIGN KEY (formation_id) REFERENCES formation(id);
-
-
-ALTER TABLE manage_social_media
-ADD FOREIGN KEY (user_id) REFERENCES user(id),
-ADD FOREIGN KEY (social_media_id) REFERENCES social_media(id);
-
-
-ALTER TABLE send_message
-ADD FOREIGN KEY (user_id) REFERENCES user(id),
-ADD FOREIGN KEY (contact_message_id) REFERENCES contact_message(id);
-
-
-ALTER TABLE write_testimony
-ADD FOREIGN KEY (user_id) REFERENCES user(id),
-ADD FOREIGN KEY (testimony_id) REFERENCES testimony(id);
-```
-
--   **CATEGORY** (id*title, *#id*title_content*)
-<!-- -   **CONTACT_MESSAGE** (id_name_email_subject_message_created_at) -->
--   **CREATE_PAGE** (_#id_name_email_password_role_, _#id_title_content_)
--   **EDIT_FORMATION** (_#id_name_email_password_role_, _#id_title_content_)
--   **FORMATION** (id_title_content)
--   **MANAGE_SOCIAL_MEDIA** (_#id_name_email_password_role_, _#id_title_link_)
--   **PAGE** (id_title_content)
-<!-- -   **SEND_MESSAGE** (_#id_name_email_password_role_, _#id_name_email_subject_message_created_at_) -->
--   **SOCIAL_MEDIA** (id_title_link)
--   **TESTIMONY** (id_title_content)
--   **USER** (id_name_email_password_role)
--   **WRITE_TESTIMONY** (_#id_name_email_password_role_, _#id_title_content_)
-
-<!-- Je ne savais pas que MOCODO pouvait également fournir Les Tables, les chemins relationnels etc...(tout de même à revoir et faire valider par Lauréanne ou/et Pauline)
-à revoir également les VARCHAR 42 c'est surement limite... -->
-
-# Mardi 21/10
-
-Revue de l'établissement des tables et retrait de celles qui n'auvaient pas leur place
-
-Réédition du MDC (le lien est mis à jour)
-
-aujourd'hui très frustrant d'avoir perdu du temps pour rien, littéralement car la création de la database ne se faisait pas et ne pouvait pas se faire car tout simplement je n'avais pas installer ce fichu postgresql... le problème était entre la chaisse et l'ordinateur apparemment
-
-je rencontre d'ailleurs toujours des soucis avec cette tâche
-
-J'ai pourtant suivi la doc synfony mais je n'arrive pas à la créer
-
-Désinstaller puis réinstaller le postgresql entièrement avec une subtilité puisque j'installe page4admin
-
-mon but serait d'enfin avoir la bdd de créée ensuite je passerai enfin aux migrations
-
-bon c'est toujours un echec je ne comprends pas...
-une journée dessus et je ne sais pas ce qu'il se passe
-à voir peut-être avec les filles du coup... je pensais pouvoir y arriver
-peut-être un autre SGBD
-
-j'ai réinstallé encore une fois on va bien voir
-
-1 journée complète de perdue 😓😓😓
-
-# Mercredi 22/10
-
-J'ai enfin pu créer ma BDD.... je l'ai faite à la main et ça s'est bien passé au niveau des migrations
-
-trema=> \dt
-Liste des tables
-Schéma | Nom | Type | Propriétaire
---------+-----------------------------+-------+--------------
-public | doctrine_migration_versions | table | trema
-public | formation | table | trema
-public | messenger_messages | table | trema
-public | page | table | trema
-public | testimony | table | trema
-public | toto | table | trema
-public | user | table | trema
-(7 lignes)
-
-## Je vais m'attaquer à la prochaine étape : l'authentification
-
-Après avoir mis en place tous les controllers, EN SUIVANT LA DOC.... (Je mets ça comme ça car à ce moment là je ne l'ai pas vraiment suivie `composer require symfony/security-bundle` à faire avant de parler de sécurité)
-Il faut résoudre le souci avec les méthodes de User car lors de la commande `php bin/console make:security:form-login`, mais ça ne devrait pas prendre longtemps vu que Lauréanne m'a expliqué quil manquait des fonctions à rajouter au niveau du User.
-Je vais esssayer de préparer le reste du projet correctement et essayer de bien avancer car là ça commence à être un peu long...
-Bien regarder la doc et impératif, et regarder d'autres projets qui se sont faits avec ce même langage... je devrais pouvoir trouver ça pour avoir une aide ...
-
-```bash
-trema=> SELECT * FROM "user";
- id | name  |     email      |                           password                           |    role
-----+-------+----------------+--------------------------------------------------------------+------------
-  1 | Admin | admin@site.com | $2y$13$RuKNhxKTjelVxlCDJaer3Oil2VpK.4.CE.YCZn8.BpJFvw7z71X12 | ROLE_ADMIN
-(1 ligne)
-
-```
-
-#### Petit résumé des choses à faire selon l'avancé du projet actuel :
-
--   Finaliser les entités manquantes :
-    <!-- attention les tables de liaisons ne sont pas faites ... -->
-
-        -   SocialLink☑️
-        -   CMS ?
-
-    <!-- et les tables de liaisons donc: -->
-
-        - create_page
-        - edit_formation
-
--   Ajouter des validations dans les entités
-
-    -   Messages d'erreurs
-    -   Contraintes symfony (NotBlank, Length ....)
-
--   Créer les FormTypes
-
-    -   TestimonyType.php☑️
-    -   FormationType.php☑️ dans le controller, gérer le fait que ce soit juste l'admin qui puisse le faire
-    -   ...
-
--   Compléter les controllers
-
-    -   Actions new, edit, delete, index pour les entités restantes
-    -   Sécurisation avec ROLE_ADMIN
-
--   Créer les vues Twig, vraiment
-
-    -   Tous les templates
-
--   Gérer les slugs et URLs dynamiques
-
-    -   Ajout d’un champ slug dans Page, Formation, etc.
-    -   Routing dynamique basé sur le slug
-
--   Créer la page Contact avec formulaire fonctionnel
-    -   Entité ou simple traitement via ContactController
-    -   Validation + envoi d’email ou stockage
-
-## Structure du projet
-
-Voici une description du rôle des principaux dossiers et fichiers du projet :
-
--   `composer.json` : configuration des dépendances PHP (Composer) et autoload.
--   `compose.yaml` / `compose.override.yaml` : fichiers Docker Compose pour lancer les services (base de données, serveur, etc.).
--   `public/` : racine publique du serveur web (contient `index.php`, assets compilés).
--   `bin/` : scripts exécutables du projet (ex : `console` pour Symfony).
--   `src/` : code source PHP de l'application (contrôleurs, entités, repositories, services, security, commandes).
-
-    -   `src/Controller/` : contrôleurs HTTP (actions qui retournent des Response/Twig/JSON).
-    -   `src/Entity/` : entités Doctrine (modèles persistés en base).
-    -   `src/Repository/` : classes pour requêtes personnalisées (QueryBuilder/DQL).
-    -   `src/Form/` : FormType Symfony (définition des formulaires).
-    -   `src/Security/` : authenticators, providers, règles de sécurité.
-    -   `src/Command/` : commandes console (Console) pour tâches d'administration.
-
--   `templates/` : templates Twig pour le rendu des pages (ex : `formation/`, `user/`, `security/`).
--   `assets/` : sources front-end (JS, CSS), contrôleurs Stimulus, point d'entrée JS.
--   `config/` : configuration Symfony (services, packages, routes).
--   `migrations/` : fichiers de migration Doctrine (versionnement du schéma de la base).
--   `var/` : cache et logs générés à l'exécution.
--   `vendor/` : dépendances installées par Composer.
--   `tests/` : tests PHPUnit.
--   `translations/` : fichiers de traduction pour l'internationalisation.
-
-Pour l'expérience user il faudrait que je fasse un dashboard qui afficherait des liens vers les pages de création de pages, formations, gestion des social medias etc.
-
-# 🚀 Suivi de projet — Tréma
-
-## ✅ Ce qui est déjà en place
-
--   Création des entités principales : `Formation`, `Page`, `Testimony`, `User`
--   Mise en place des CRUD avec EasyAdmin
--   Sécurisation du back-office avec authentification (`LoginFormAuthenticator`)
--   Formulaire de contact fonctionnel avec envoi d’email via `ContactDTO`, `ContactType`, `Mailer`
--   Gestion des témoignages avec affichage conditionnel (`isPublished`)
--   Soumission de témoignages par les visiteurs
--   Intégration des logos cliquables (Instagram, LinkedIn)
--   Page d’accueil avec effets de hover + texte cliquable
--   Page contact avec formulaire
--   Résolution du bug d’affichage du logo
--   Menu de navigation avec dropdown complet
--   Dashboard admin clair et fonctionnel
--   Review complète du code + ajout de commentaires
--   Animations CSS légères intégrées
--   Refonte CSS/Bootstrap en cours sur la page des formations
-
----
-
-## 📋 Tâches restantes et finalisation
-
-| Tâche                                                         | Statut      | Action à faire                                                          |
-| ------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------- |
-| Créer les vues Twig pour les entités et pages dynamiques      | ✅          | Templates Twig finalisés                                                |
-| Nettoyer le projet                                            | ✅          | Suppression des fichiers inutiles + review finale                       |
-| Ajouter un lien fonctionnel vers "Mes outils"                 | ✅          | Créer la page ou rediriger vers une section existante                   |
-| Ajouter un lien fonctionnel vers "Certifications"             | ✅          | Idem que ci-dessus                                                      |
-| Rendre les pages créées par l’admin accessibles via leur slug | ✅          | Routing dynamique + contrôleur générique + affichage Twig               |
-| Ajouter le champ `slug` dans `Formation` (optionnel)          | ✅          | Pour URLs propres si besoin                                             |
-| Finaliser le style avec ou sans Bootstrap                     | 🛠️ En cours | Harmoniser les pages, responsive, animations légères                    |
-| Donner plus de pouvoir de création au client                  | 🧠 À penser | Peut-être via un éditeur WYSIWYG ou des blocs dynamiques dans EasyAdmin |
-
----
-
-## 🧩 Notes techniques et réflexions
-
--   Le formulaire de contact est bien encapsulé avec DTO + validation
--   Le mapping Symfony fonctionne parfaitement grâce à `handleRequest()` et `getData()`
--   Mailpit est bien configuré pour le dev local
--   Le projet est bien structuré : migrations, arborescence, sécurité
--   Les témoignages sont bien gérés côté admin et front
--   Le code est propre (bien sûr basique...), commenté partiellement pour les code reviews , pourrait être tout à fait utilisé pour compléter mon Dossier Pro par exemple
-
----
-
-## 🌟 Prochaine étape
-
-🎨 **Focus sur le style** : harmonisation visuelle, responsive design, animations douces, et pourquoi pas un thème clair/sombre.
-😵 **Gestion des erreurs** : Gérer les pages erreur
-🦾 **Encore plus de pouvoir pour le client** : Pouvoir inclure une image supplémentaire par exemple, une section etc ....
+Mais en une phrase :
+Les cinq fichiers liés à l’affichage d’une page via son slug collaborent de cette manière : l’entité définit la structure des données, le contrôleur admin gère leur création et leur persistance, le service récupère les pages publiées, l’extension Twig les expose aux vues, et le template affiche dynamiquement le contenu. Un peu de gymnastique ne fait pas de mal — à revoir et re-revoir pour bien intégrer tout ça.

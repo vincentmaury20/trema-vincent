@@ -46,3 +46,27 @@ final class PageController extends AbstractController
       ]);
    }
 }
+
+
+// |--------------------------------------------------------------------------
+// |  Résumé pédagogique du contrôleur showBySlug
+// |--------------------------------------------------------------------------
+// | Route : /page/{slug} → méthode showBySlug appelée avec le slug de l’URL.
+// | 
+// | 1. Vérifie si le slug est dans une liste interdite ['contact', 'login', 'admin']
+// |    → Si oui, renvoie une 404 (page non trouvée).
+// | 
+// | 2. Utilise l’EntityManager pour chercher une entité Page :
+// |    - avec le slug donné
+// |    - et qui est publiée (published = true)
+// | 
+// | 3. Si aucune page trouvée → renvoie une 404 avec message personnalisé.
+// | 
+// | 4. Si la page existe → rend le template Twig 'page/show.html.twig'
+// |    en lui passant la variable 'page'.
+// | 
+// | Bonnes pratiques :
+// | - Sécurise l’accès à certaines pages via une liste noire.
+// | - Ne montre que les pages publiées.
+// | - Utilise l’injection de dépendance pour l’EntityManager.
+// | - Rend une vue claire avec un contexte contrôlé.
