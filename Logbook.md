@@ -109,3 +109,4 @@ Tableau explicatif ici:
 
 Mais en une phrase :
 Les cinq fichiers liés à l’affichage d’une page via son slug collaborent de cette manière : l’entité définit la structure des données, le contrôleur admin gère leur création et leur persistance, le service récupère les pages publiées, l’extension Twig les expose aux vues, et le template affiche dynamiquement le contenu. Un peu de gymnastique ne fait pas de mal — à revoir et re-revoir pour bien intégrer tout ça.
+symfony serve
